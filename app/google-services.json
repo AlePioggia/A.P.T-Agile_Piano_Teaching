@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "339902633024",
+    "project_id": "apt-agilepianoteaching",
+    "storage_bucket": "apt-agilepianoteaching.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:339902633024:android:620a8564772215e0cabba5",
+        "android_client_info": {
+          "package_name": "com.example.apt_agile_piano_teaching"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "339902633024-jj1n1f0ol960fp66uddnu8a6d5bdh43v.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD-vzZuAkx5d0vh-pZeFlRkrrq1cAl_rQ8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "339902633024-jj1n1f0ol960fp66uddnu8a6d5bdh43v.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
