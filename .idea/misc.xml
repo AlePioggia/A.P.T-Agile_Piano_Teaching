@@ -3,7 +3,9 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/alexp/AndroidStudioProjects/APTAgile_Piano_Teaching/app/src/main/res/layout/activity_login.xml" value="0.1557377049180328" />
         <entry key="..\:/Users/alexp/AndroidStudioProjects/APTAgile_Piano_Teaching/app/src/main/res/layout/activity_main.xml" value="0.1" />
+        <entry key="..\:/Users/alexp/AndroidStudioProjects/APTAgile_Piano_Teaching/app/src/main/res/layout/activity_register.xml" value="0.1" />
         <entry key="..\:/Users/alexp/AndroidStudioProjects/APTAgile_Piano_Teaching/app/src/main/res/layout/fragment_add.xml" value="0.1" />
         <entry key="..\:/Users/alexp/AndroidStudioProjects/APTAgile_Piano_Teaching/app/src/main/res/layout/fragment_home.xml" value="0.1" />
         <entry key="..\:/Users/alexp/AndroidStudioProjects/APTAgile_Piano_Teaching/app/src/main/res/layout/fragment_menu.xml" value="0.26614583333333336" />
