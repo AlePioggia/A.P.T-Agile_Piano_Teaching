@@ -2,25 +2,30 @@ package com.example.apt_agile_piano_teaching;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+
+import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.AuthResult;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
-public class RegisterActivity extends AppCompatActivity {
+public class RegistrationActivity extends AppCompatActivity {
 
-    //Inserimento dei dati nel db con firebase
 
-    DatabaseReference dbReference  = FirebaseDatabase.getInstance().getReference();
+    private FirebaseAuth mAuth = FirebaseAuth.getInstance();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,43 +55,36 @@ public class RegisterActivity extends AppCompatActivity {
 
                 //check if user did fill all the fields before sendig data to firebase
                 if (firstNameTxt.isEmpty() || surnameTxt.isEmpty() || mailTxt.isEmpty() || passwordTxt.isEmpty()) {
-                    Toast.makeText(RegisterActivity.this, "Please fill all fields", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(RegistrationActivity.this, "Please fill all fields", Toast.LENGTH_SHORT).show();
                 } else if (!passwordTxt.equals(confirmPasswordTxt)) {
-                    Toast.makeText(RegisterActivity.this, "Passwords are not matching", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(RegistrationActivity.this, "Passwords are not matching", Toast.LENGTH_SHORT).show();
                 } else {
-                    dbReference.child("users").addListenerForSingleValueEvent(new ValueEventListener() {
-                        @Override
-                        public void onDataChange(@NonNull DataSnapshot snapshot) {
-                            //check if the mail isn't already registered
-                            if (snapshot.hasChild(mailTxt)) {
-                                Toast.makeText(RegisterActivity.this, "Mail is already registered", Toast.LENGTH_SHORT).show();
-                            } else {
-                                // using mail as unique identifier
-                                dbReference.child("users").child(mailTxt).child("firstName").setValue(firstNameTxt);
-                                dbReference.child("users").child(mailTxt).child("surname").setValue(surnameTxt);
-                                dbReference.child("users").child(mailTxt).child("password").setValue(passwordTxt);
-
-                                //show a success message then finish the activity
-                                Toast.makeText(RegisterActivity.this, "User registered successfully", Toast.LENGTH_SHORT).show();
-                                finish();
-                            }
-
-                        }
-
-                        @Override
-                        public void onCancelled(@NonNull DatabaseError error) {
-
-                        }
-                    });
+                    mAuth.createUserWithEmailAndPassword(mailTxt, passwordTxt)
+                            .addOnCompleteListener(RegistrationActivity.this, new OnCompleteListener<AuthResult>() {
+                                @Override
+                                public void onComplete(@NonNull Task<AuthResult> task) {
+                                    if (task.isSuccessful()) {
+                                        // Sign in success, update UI with the signed-in user's information
+                                        FirebaseUser user = mAuth.getCurrentUser();
+                                        Toast.makeText(RegistrationActivity.this, "Authentication success!",
+                                                Toast.LENGTH_SHORT).show();
+                                    } else {
+                                        // If sign in fails, display a message to the user.
+                                        Toast.makeText(RegistrationActivity.this, "Authentication failed.",
+                                                Toast.LENGTH_SHORT).show();
+                                    }
+                                }
+                            });
                 }
             }
         });
         loginNowBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                startActivity(new Intent(RegistrationActivity.this, LoginActivity.class));
             }
         });
 
     }
+
 }
