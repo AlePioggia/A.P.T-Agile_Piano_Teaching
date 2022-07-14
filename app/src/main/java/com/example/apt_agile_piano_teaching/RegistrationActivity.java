@@ -1,17 +1,27 @@
 package com.example.apt_agile_piano_teaching;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.Activity;
+import android.content.ContentResolver;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
+import android.os.Handler;
 import android.view.View;
+import android.webkit.MimeTypeMap;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.apt_agile_piano_teaching.model.ImageUpload;
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
@@ -21,25 +31,56 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.storage.FileDownloadTask;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.OnProgressListener;
+import com.google.firebase.storage.StorageReference;
+import com.google.firebase.storage.UploadTask;
+import com.squareup.picasso.Picasso;
+
+import java.io.File;
+import java.util.UUID;
 
 public class RegistrationActivity extends AppCompatActivity {
 
-
+    private final int PICK_IMAGE_REQUEST = 1;
     private FirebaseAuth mAuth = FirebaseAuth.getInstance();
+    private EditText firstName;
+    private EditText surname;
+    private EditText mail;
+    private EditText password;
+    private EditText confirmPassword;
+    private Button chooseProfileImageButton;
+    private Button registerBtn;
+    private TextView loginNowBtn;
+    private ImageView profileImage;
+    private Uri mImageUri;
+
+    private StorageReference mStorageRef;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
 
-        final EditText firstName = findViewById(R.id.name);
-        final EditText surname = findViewById(R.id.surname);
-        final EditText mail = findViewById(R.id.email);
-        final EditText password = findViewById(R.id.password);
-        final EditText confirmPassword = findViewById(R.id.confirmPassword);
+        firstName = findViewById(R.id.name);
+        surname = findViewById(R.id.surname);
+        mail = findViewById(R.id.email);
+        password = findViewById(R.id.password);
+        confirmPassword = findViewById(R.id.confirmPassword);
+        chooseProfileImageButton = findViewById(R.id.btnChooseProfileImg);
+        registerBtn = findViewById(R.id.registerBtn);
+        loginNowBtn = findViewById(R.id.logInNowBtn);
+        profileImage = findViewById(R.id.profileImage);
+        mStorageRef = FirebaseStorage.getInstance().getReference("uploads");
 
-        final Button registerBtn = findViewById(R.id.registerBtn);
-        final TextView loginNowBtn = findViewById(R.id.logInNowBtn);
+        chooseProfileImageButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                openFileChooser();
+            }
+        });
 
         registerBtn.setOnClickListener(new View.OnClickListener() {
 
@@ -54,7 +95,7 @@ public class RegistrationActivity extends AppCompatActivity {
                 final String confirmPasswordTxt = confirmPassword.getText().toString();
 
                 //check if user did fill all the fields before sendig data to firebase
-                if (firstNameTxt.isEmpty() || surnameTxt.isEmpty() || mailTxt.isEmpty() || passwordTxt.isEmpty()) {
+                if (firstNameTxt.isEmpty() || surnameTxt.isEmpty() || mailTxt.isEmpty() || passwordTxt.isEmpty() || profileImage == null) {
                     Toast.makeText(RegistrationActivity.this, "Please fill all fields", Toast.LENGTH_SHORT).show();
                 } else if (!passwordTxt.equals(confirmPasswordTxt)) {
                     Toast.makeText(RegistrationActivity.this, "Passwords are not matching", Toast.LENGTH_SHORT).show();
@@ -68,6 +109,7 @@ public class RegistrationActivity extends AppCompatActivity {
                                         FirebaseUser user = mAuth.getCurrentUser();
                                         Toast.makeText(RegistrationActivity.this, "Authentication success!",
                                                 Toast.LENGTH_SHORT).show();
+                                        uploadImage();
                                     } else {
                                         // If sign in fails, display a message to the user.
                                         Toast.makeText(RegistrationActivity.this, "Authentication failed.",
@@ -85,6 +127,58 @@ public class RegistrationActivity extends AppCompatActivity {
             }
         });
 
+    }
+
+    private void openFileChooser() {
+        Intent intent = new Intent();
+        intent.setType("image/*");
+        intent.setAction(Intent.ACTION_GET_CONTENT);
+        startActivityForResult(intent, PICK_IMAGE_REQUEST);
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if (requestCode == PICK_IMAGE_REQUEST && resultCode == Activity.RESULT_OK &&
+                data != null && data.getData() != null) {
+            mImageUri = data.getData();
+
+            Picasso.get().load(mImageUri).into(profileImage);
+        }
+    }
+
+    private String getFileExtension(Uri uri) {
+        ContentResolver cR = getContentResolver();
+        MimeTypeMap mime = MimeTypeMap.getSingleton();
+        return mime.getExtensionFromMimeType(cR.getType(uri));
+    }
+
+    private void uploadImage() {
+        if (mImageUri != null) {
+            StorageReference fileReference = mStorageRef.child(mail.getText().toString() + "." + getFileExtension(mImageUri));
+
+            fileReference.putFile(mImageUri).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+                @Override
+                public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                    Toast.makeText(RegistrationActivity.this, "Upload successful", Toast.LENGTH_SHORT).show();
+                    mStorageRef.getFile(new File("alexpioggia@gmail.com.jpg")).addOnSuccessListener(new OnSuccessListener<FileDownloadTask.TaskSnapshot>() {
+                        @Override
+                        public void onSuccess(FileDownloadTask.TaskSnapshot taskSnapshot) {
+                            Toast.makeText(RegistrationActivity.this, "successo!", Toast.LENGTH_SHORT).show();
+                        }
+                    });
+                }
+            })
+            .addOnFailureListener(new OnFailureListener() {
+                @Override
+                public void onFailure(@NonNull Exception e) {
+                    Toast.makeText(RegistrationActivity.this, e.getMessage(), Toast.LENGTH_SHORT).show();
+                }
+            });
+        } else {
+            Toast.makeText(RegistrationActivity.this, "No file selected", Toast.LENGTH_SHORT).show();
+        }
     }
 
 }
