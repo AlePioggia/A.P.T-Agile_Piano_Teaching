@@ -1,4 +1,4 @@
-package com.example.apt_agile_piano_teaching;
+package com.example.apt_agile_piano_teaching.activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
@@ -7,7 +7,12 @@ import androidx.fragment.app.FragmentTransaction;
 
 import android.os.Bundle;
 
+import com.example.apt_agile_piano_teaching.R;
 import com.example.apt_agile_piano_teaching.databinding.ActivityMainBinding;
+import com.example.apt_agile_piano_teaching.fragments.AddFragment;
+import com.example.apt_agile_piano_teaching.fragments.HomeFragment;
+import com.example.apt_agile_piano_teaching.fragments.MenuFragment;
+import com.example.apt_agile_piano_teaching.fragments.ProfileFragment;
 
 public class MainActivity extends AppCompatActivity {
 

@@ -1,4 +1,4 @@
-package com.example.apt_agile_piano_teaching.model;
+package com.example.apt_agile_piano_teaching.models;
 
 public class ImageUpload {
 
