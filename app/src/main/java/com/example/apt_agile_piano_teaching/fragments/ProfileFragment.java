@@ -16,8 +16,11 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.example.apt_agile_piano_teaching.activities.LoginActivity;
 import com.example.apt_agile_piano_teaching.R;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 
@@ -33,6 +36,7 @@ public class ProfileFragment extends Fragment {
     private StorageReference mStorageRef;
     private ImageView mProfileImageShow;
     private FirebaseAuth mAuth = FirebaseAuth.getInstance();
+    private FirebaseFirestore mDbReference = FirebaseFirestore.getInstance();
 
     public ProfileFragment() {
         // Required empty public constructor
@@ -62,11 +66,16 @@ public class ProfileFragment extends Fragment {
         mStorageRef = FirebaseStorage.getInstance().getReference("uploads/" + mAuth.getCurrentUser().getEmail() + ".jpg");
         Glide.with(getActivity()).load(mStorageRef).into(mProfileImageShow);
 
-        firstName.setText(" empty name ");
-        surname.setText(" empty surname ");
-        mail.setText(FirebaseAuth.getInstance().getCurrentUser().getEmail());
-
-        StorageReference imageRef = mStorageRef.child("uploads/alexpioggia@gmail.com.jpg");
+        mDbReference.collection("users").document(mAuth.getCurrentUser().getUid()).get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+            @Override
+            public void onSuccess(DocumentSnapshot documentSnapshot) {
+                if (documentSnapshot.exists()) {
+                    firstName.setText(documentSnapshot.get("name", String.class));
+                    surname.setText(documentSnapshot.get("lastName", String.class));
+                    mail.setText(FirebaseAuth.getInstance().getCurrentUser().getEmail());
+                }
+            }
+        });
 
         logoutButton.setOnClickListener(new View.OnClickListener() {
             @Override

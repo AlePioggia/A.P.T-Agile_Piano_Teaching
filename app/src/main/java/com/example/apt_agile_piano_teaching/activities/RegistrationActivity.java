@@ -18,6 +18,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.apt_agile_piano_teaching.R;
+import com.example.apt_agile_piano_teaching.models.User;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -25,6 +26,7 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.storage.FileDownloadTask;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
@@ -37,6 +39,7 @@ public class RegistrationActivity extends AppCompatActivity {
 
     private final int PICK_IMAGE_REQUEST = 1;
     private FirebaseAuth mAuth = FirebaseAuth.getInstance();
+    private FirebaseFirestore mDbReference = FirebaseFirestore.getInstance();
     private EditText firstName;
     private EditText surname;
     private EditText mail;
@@ -102,6 +105,17 @@ public class RegistrationActivity extends AppCompatActivity {
                                         Toast.makeText(RegistrationActivity.this, "Authentication success!",
                                                 Toast.LENGTH_SHORT).show();
                                         uploadImage();
+                                        User currentUser = new User(mAuth.getCurrentUser().getEmail(), firstNameTxt, surnameTxt);
+
+                                        mDbReference.collection("users")
+                                                .document(mAuth.getCurrentUser().getUid())
+                                                .set(currentUser)
+                                                .addOnSuccessListener(new OnSuccessListener<Void>() {
+                                                    @Override
+                                                    public void onSuccess(Void unused) {
+                                                        Toast.makeText(RegistrationActivity.this, "inserimento nel db avvenuto correttamente!", Toast.LENGTH_SHORT).show();
+                                                    }
+                                                });
                                     } else {
                                         // If sign in fails, display a message to the user.
                                         Toast.makeText(RegistrationActivity.this, "Authentication failed.",
@@ -162,12 +176,12 @@ public class RegistrationActivity extends AppCompatActivity {
                     });
                 }
             })
-            .addOnFailureListener(new OnFailureListener() {
-                @Override
-                public void onFailure(@NonNull Exception e) {
-                    Toast.makeText(RegistrationActivity.this, e.getMessage(), Toast.LENGTH_SHORT).show();
-                }
-            });
+                    .addOnFailureListener(new OnFailureListener() {
+                        @Override
+                        public void onFailure(@NonNull Exception e) {
+                            Toast.makeText(RegistrationActivity.this, e.getMessage(), Toast.LENGTH_SHORT).show();
+                        }
+                    });
         } else {
             Toast.makeText(RegistrationActivity.this, "No file selected", Toast.LENGTH_SHORT).show();
         }
