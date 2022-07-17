@@ -1,65 +1,106 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:padding="16dp"
     tools:context=".fragments.AddFragment">
 
-
-    <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/btnChooseFile"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="choose file" />
-
-    <EditText
-        android:id="@+id/editFileName"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_toEndOf="@+id/btnChooseFile"
-        android:hint="Enter file name"
-        android:layout_marginStart="16dp"
-        android:gravity="center"
-        />
-
-    <ImageView
-        android:id="@+id/imageView"
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_above="@+id/progressBar"
-        android:layout_below="@+id/editFileName" />
+        android:orientation="vertical">
 
-    <ProgressBar
-        android:id="@+id/progressBar"
-        style="@style/Widget.AppCompat.ProgressBar.Horizontal"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_above="@+id/btnUpload"
-        android:layout_alignParentStart="true"
-        android:layout_marginStart="4dp"
-        android:layout_marginBottom="7dp" />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Lesson"
+            android:textStyle="bold"
+            android:fontFamily="sans-serif-condensed"
+            android:textSize="18sp"
+            android:gravity="center"
+            />
 
-    <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/btnUpload"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginStart="20dp"
-        android:layout_marginTop="100dp"
-        android:layout_marginEnd="20dp"
-        android:layout_marginBottom="133dp"
-        android:text="Upload" />
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/lessonDateBtn"
+            android:layout_marginTop="10dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Seleziona data" />
 
-    <TextView
-        android:id="@+id/showUploads"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignBaseline="@+id/btnUpload"
-        android:layout_alignBottom="@+id/btnUpload"
-        android:layout_marginStart="25dp"
-        android:layout_toEndOf="@+id/btnUpload"
-        android:text="Show Uploads"
-        android:textSize="16dp" />
-</RelativeLayout>
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/lessonStartTimeBtn"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:text="Seleziona orario d'inizio" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/lessonEndTimeBtn"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:text="Seleziona orario di fine lezione" />
+
+        <TextView
+            android:layout_marginTop="10dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Compiti"
+            android:textStyle="bold"
+            android:fontFamily="sans-serif-condensed"
+            android:textSize="18sp"
+            android:gravity="center"
+        />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:layout_marginTop="10dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Aggiungi un assignment"
+        />
+
+        <TextView
+            android:layout_marginTop="10dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Note"
+            android:textStyle="bold"
+            android:fontFamily="sans-serif-condensed"
+            android:textSize="18sp"
+            android:gravity="center"
+            />
+
+        <TextView
+            android:id="@+id/lessonNotes"
+            android:hint="Spazio dedicato a delle eventuali note"
+            android:layout_marginTop="10dp"
+            android:height="200dp"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+        />
+
+        <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+            android:layout_width="match_parent"
+            android:layout_marginTop="10dp"
+            android:layout_height="match_parent"
+            android:orientation="horizontal" >
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:layout_weight="1"
+                android:id="@+id/lessonConfirmBtn"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="Conferma" />
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:layout_weight="1"
+                android:id="@+id/lessonCancelBtn"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="Annulla" />
+        </LinearLayout>
+
+    </LinearLayout>
+
+</ScrollView>
