@@ -54,6 +54,7 @@
         />
 
         <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/selectAssignmentButton"
             android:layout_marginTop="10dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -71,7 +72,7 @@
             android:gravity="center"
             />
 
-        <TextView
+        <EditText
             android:id="@+id/lessonNotes"
             android:hint="Spazio dedicato a delle eventuali note"
             android:layout_marginTop="10dp"
