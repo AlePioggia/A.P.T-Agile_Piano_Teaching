@@ -22,10 +22,19 @@ import android.widget.TimePicker;
 import android.widget.Toast;
 
 import com.example.apt_agile_piano_teaching.R;
+import com.example.apt_agile_piano_teaching.activities.RegistrationActivity;
+import com.example.apt_agile_piano_teaching.models.Assignment;
+import com.example.apt_agile_piano_teaching.models.Lesson;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.Date;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 import java.util.TimeZone;
 
 /**
@@ -39,6 +48,8 @@ public class AddFragment extends Fragment {
     private Button lessonStartTimeButton;
     private Button lessonEndTimeButton;
     private Button assignmentButton;
+    private Button lessonConfirmButton;
+    private Button cancelButton;
 
     //Assingment fields
     private Spinner assignmentSpinner;
@@ -53,6 +64,12 @@ public class AddFragment extends Fragment {
     private LocalDateTime startDate;
     private LocalDateTime endDate;
 
+    //Assignments
+    private List<Assignment> assignments = new ArrayList<>();
+
+    //Firebase
+    private FirebaseAuth mAuth = FirebaseAuth.getInstance();
+    private FirebaseFirestore mDbReference = FirebaseFirestore.getInstance();
 
     public AddFragment() {
         // Required empty public constructor
@@ -75,8 +92,27 @@ public class AddFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_add, container, false);
+        lessonConfirmButton = view.findViewById(R.id.lessonConfirmBtn);
         assignmentButton = view.findViewById(R.id.selectAssignmentButton);
         lessonDateBtn = view.findViewById(R.id.lessonDateBtn);
+        lessonNotes = view.findViewById(R.id.lessonNotes);
+
+        lessonConfirmButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Lesson lesson = new Lesson(startDate, endDate, assignments, lessonNotes.getText().toString());
+
+                mDbReference.collection("lessons")
+                        .document(mAuth.getCurrentUser().getEmail())
+                        .set(lesson)
+                        .addOnSuccessListener(new OnSuccessListener<Void>() {
+                            @Override
+                            public void onSuccess(Void unused) {
+                                Toast.makeText(getActivity(), "inserimento nel db avvenuto correttamente!", Toast.LENGTH_SHORT).show();
+                            }
+                        });
+            }
+        });
 
         lessonDateBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -171,8 +207,8 @@ public class AddFragment extends Fragment {
 
          assignmentSpinner = dialog.findViewById(R.id.assignmentSpinner);
          assignmentBookName = dialog.findViewById(R.id.assignmentSpinnerBookName);
+         assignmentPages = dialog.findViewById(R.id.assignmentPages);
          assignmentBpm = dialog.findViewById(R.id.assignmentBpm);
-         //lessonNotes = dialog.findViewById(R.id.assignmentNotes);
          assignmentConfirmation = dialog.findViewById(R.id.assignmentConfirm);
          assignmentCancel = dialog.findViewById(R.id.assignmentCancel);
 
@@ -180,7 +216,27 @@ public class AddFragment extends Fragment {
 
         ArrayAdapter<String> adapter = new ArrayAdapter<>(getActivity(), android.R.layout.simple_spinner_dropdown_item,items);
 
+        boolean isValid = assignmentSpinner != null && assignmentBookName != null && assignmentBpm != null;
+
         assignmentSpinner.setAdapter(adapter);
+
+        assignmentConfirmation.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (isValid) {
+                    assignments.add(new Assignment(
+                            assignmentSpinner.getSelectedItem().toString(),
+                            assignmentBookName.getText().toString(),
+                            assignmentPages.getText().toString(),
+                            Integer.valueOf(assignmentBpm.getText().toString())));
+                    Toast.makeText(getActivity(), assignments.toString(), Toast.LENGTH_SHORT).show();
+                    System.out.println(assignments.toString());
+                    dialog.dismiss();
+                } else {
+                    Toast.makeText(getActivity(), "Compila tutti i campi", Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
 
          assignmentCancel.setOnClickListener(new View.OnClickListener() {
              @Override
