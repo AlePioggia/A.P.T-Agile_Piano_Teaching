@@ -52,7 +52,6 @@ public class StudentsActivity extends AppCompatActivity {
                     students[i] = studentsMap.keySet().toArray()[i].toString();
                     names[i] = studentsMap.get(students[i]);
                 }
-
             }
         });
 

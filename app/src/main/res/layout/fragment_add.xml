@@ -19,8 +19,15 @@
             android:textStyle="bold"
             android:fontFamily="sans-serif-condensed"
             android:textSize="18sp"
-            android:gravity="center"
-            />
+            android:gravity="center" />
+
+        <androidx.appcompat.widget.AppCompatSpinner
+            android:id="@+id/lessonSpinner"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:background="@android:drawable/btn_dropdown"
+            android:spinnerMode="dialog" />
 
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/lessonDateBtn"

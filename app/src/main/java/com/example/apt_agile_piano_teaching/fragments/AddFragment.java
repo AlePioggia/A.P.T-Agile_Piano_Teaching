@@ -9,6 +9,7 @@ import android.os.Bundle;
 import androidx.annotation.RequiresApi;
 import androidx.fragment.app.Fragment;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -29,6 +30,7 @@ import com.example.apt_agile_piano_teaching.models.Lesson;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QuerySnapshot;
 
 import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
@@ -61,6 +63,7 @@ public class AddFragment extends Fragment {
     private Button cancelButton;
 
     //Assingment fields
+    private Spinner lessonSpinner;
     private Spinner assignmentSpinner;
     private EditText assignmentBookName;
     private EditText assignmentPages;
@@ -96,6 +99,7 @@ public class AddFragment extends Fragment {
         super.onCreate(savedInstanceState);
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.N)
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -108,6 +112,24 @@ public class AddFragment extends Fragment {
         showDate = view.findViewById(R.id.showDate);
         showStartDate = view.findViewById(R.id.showStartDate);
         showEndDate = view.findViewById(R.id.showEndDate);
+        lessonSpinner = view.findViewById(R.id.lessonSpinner);
+
+        List<String> items = new ArrayList<>();
+        mDbReference.collection("users").get().addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
+            @Override
+            public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+                    queryDocumentSnapshots.getDocuments().forEach(document -> {
+                        items.add(document.get("mail").toString());
+                    });
+
+                }
+            }
+        });
+        String[] itemsArray = items.toArray(new String[items.size()]);
+        System.out.println(itemsArray.toString());
+        ArrayAdapter<String> lessonAdapter = new ArrayAdapter<>(getActivity(), android.R.layout.simple_spinner_dropdown_item,itemsArray);
+        lessonSpinner.setAdapter(lessonAdapter);
 
         lessonConfirmButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -115,7 +137,7 @@ public class AddFragment extends Fragment {
                 Lesson lesson = new Lesson(startDate, endDate, assignments, lessonNotes.getText().toString());
 
                 mDbReference.collection("lessons")
-                        .document(mAuth.getCurrentUser().getEmail())
+                        .document()
                         .set(lesson)
                         .addOnSuccessListener(new OnSuccessListener<Void>() {
                             @Override

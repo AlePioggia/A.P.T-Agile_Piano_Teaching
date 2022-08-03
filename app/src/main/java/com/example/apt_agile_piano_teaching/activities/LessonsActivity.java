@@ -30,8 +30,8 @@ public class LessonsActivity extends AppCompatActivity {
     private StorageReference mStorageRef;
     private FirebaseAuth mAuth = FirebaseAuth.getInstance();
     private FirebaseFirestore mDbReference = FirebaseFirestore.getInstance();
-    private Map<String, String> studentsMap = new HashMap<>();
-    private String[] students = new String[10];
+    private Map<String, String> lessonsMap = new HashMap<>();
+    private String[] lessons = new String[10];
     private String[] names = new String[10];
 
     @Override
@@ -39,6 +39,23 @@ public class LessonsActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_lessons);
         mListView = findViewById(R.id.lessonsListView);
+        mDbReference.collection("users").get().addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
+            @Override
+            public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+                    queryDocumentSnapshots.getDocuments().forEach(document -> {
+                        lessonsMap.put(document.get("mail").toString(), document.get("name") + " " + document.get("lastName"));
+                    });
+                }
+                lessons = new String[lessonsMap.size()];
+                names = new String[lessonsMap.size()];
+
+                for (int i = 0; i < lessons.length; i++) {
+                    lessons[i] = lessonsMap.keySet().toArray()[i].toString();
+                    names[i] = lessonsMap.get(lessons[i]);
+                }
+            }
+        });
     }
 
 }
