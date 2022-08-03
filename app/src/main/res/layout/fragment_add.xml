@@ -28,6 +28,16 @@
             android:layout_height="wrap_content"
             android:text="Seleziona data" />
 
+        <TextView
+            android:id="@+id/showDate"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="data"
+            android:fontFamily="sans-serif-condensed"
+            android:textSize="18sp"
+            android:gravity="center"
+            />
+
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/lessonStartTimeBtn"
             android:layout_width="match_parent"
@@ -35,12 +45,32 @@
             android:layout_marginTop="10dp"
             android:text="Seleziona orario d'inizio" />
 
+        <TextView
+            android:id="@+id/showStartDate"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="orario d'inizio"
+            android:fontFamily="sans-serif-condensed"
+            android:textSize="18sp"
+            android:gravity="center"
+            />
+
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/lessonEndTimeBtn"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
             android:text="Seleziona orario di fine lezione" />
+
+        <TextView
+            android:id="@+id/showEndDate"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="sans-serif-condensed"
+            android:textSize="18sp"
+            android:text="orario di fine"
+            android:gravity="center"
+            />
 
         <TextView
             android:layout_marginTop="10dp"

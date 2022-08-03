@@ -18,6 +18,7 @@ import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.TimePicker;
 import android.widget.Toast;
 
@@ -29,7 +30,11 @@ import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.FirebaseFirestore;
 
+import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatterBuilder;
+import java.time.temporal.ChronoUnit;
+import java.time.temporal.TemporalUnit;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.HashMap;
@@ -43,6 +48,10 @@ import java.util.TimeZone;
  * create an instance of this fragment.
  */
 public class AddFragment extends Fragment {
+
+    private TextView showDate;
+    private TextView showStartDate;
+    private TextView showEndDate;
 
     private Button lessonDateBtn;
     private Button lessonStartTimeButton;
@@ -96,6 +105,9 @@ public class AddFragment extends Fragment {
         assignmentButton = view.findViewById(R.id.selectAssignmentButton);
         lessonDateBtn = view.findViewById(R.id.lessonDateBtn);
         lessonNotes = view.findViewById(R.id.lessonNotes);
+        showDate = view.findViewById(R.id.showDate);
+        showStartDate = view.findViewById(R.id.showStartDate);
+        showEndDate = view.findViewById(R.id.showEndDate);
 
         lessonConfirmButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -120,12 +132,12 @@ public class AddFragment extends Fragment {
                 Calendar calendar = Calendar.getInstance(TimeZone.getDefault());
 
                 DatePickerDialog dialog = new DatePickerDialog(getActivity(), new DatePickerDialog.OnDateSetListener() {
+                    @RequiresApi(api = Build.VERSION_CODES.O)
                     @Override
                     public void onDateSet(DatePicker datePicker, int year, int month, int day) {
                         Toast.makeText(getActivity(), "Data settata correttamente", Toast.LENGTH_SHORT).show();
-                        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-                            startDate = LocalDateTime.of(year, month, day, 0, 0, 0);
-                        }
+                        startDate = LocalDateTime.of(year, month, day, 0, 0, 0);
+                        showDate.setText(startDate.format(new DateTimeFormatterBuilder().appendPattern("yyyy-MM-dd").toFormatter()).toString());
                     }
                 }
                         , calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH), calendar.get(Calendar.DAY_OF_MONTH));
@@ -149,6 +161,7 @@ public class AddFragment extends Fragment {
                         public void onTimeSet(TimePicker timePicker, int hour, int minute) {
                             startDate = startDate.withHour(hour).withMinute(minute);
                             Toast.makeText(getActivity(), startDate.toString(), Toast.LENGTH_SHORT).show();
+                            showStartDate.setText(startDate.getHour() + " : " + startDate.getMinute());
                         }
                     }, hour, minute, true);
                     dialog.show();
@@ -177,6 +190,7 @@ public class AddFragment extends Fragment {
                                 Toast.makeText(getActivity(), "L'ora di fine deve essere maggiore rispetto a quella iniziale", Toast.LENGTH_SHORT).show();
                             } else {
                                 endDate = endDate.withHour(hour).withMinute(minute);
+                                showEndDate.setText(endDate.getHour() + " : " + endDate.getMinute());
                                 Toast.makeText(getActivity(), endDate.toString(), Toast.LENGTH_SHORT).show();
                             }
                         }

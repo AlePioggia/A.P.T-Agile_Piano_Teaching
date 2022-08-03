@@ -14,8 +14,11 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.example.apt_agile_piano_teaching.activities.LessonsActivity;
 import com.example.apt_agile_piano_teaching.activities.LoginActivity;
 import com.example.apt_agile_piano_teaching.R;
+import com.example.apt_agile_piano_teaching.activities.RegistrationActivity;
+import com.example.apt_agile_piano_teaching.activities.StudentsActivity;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -35,6 +38,7 @@ public class ProfileFragment extends Fragment {
     private FirebaseUser user;
     private StorageReference mStorageRef;
     private ImageView mProfileImageShow;
+    private Button mEditProfileBtn;
     private FirebaseAuth mAuth = FirebaseAuth.getInstance();
     private FirebaseFirestore mDbReference = FirebaseFirestore.getInstance();
 
@@ -64,6 +68,15 @@ public class ProfileFragment extends Fragment {
         Button logoutButton = view.findViewById(R.id.logoutButton);
         mProfileImageShow = view.findViewById(R.id.showProfileImage);
         mStorageRef = FirebaseStorage.getInstance().getReference("uploads/" + mAuth.getCurrentUser().getEmail() + ".jpg");
+        mEditProfileBtn = view.findViewById(R.id.editProfileButton);
+
+        mEditProfileBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(getActivity(), StudentsActivity.class));
+            }
+        });
+
         Glide.with(getActivity()).load(mStorageRef).into(mProfileImageShow);
 
         mDbReference.collection("users").document(mAuth.getCurrentUser().getUid()).get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {

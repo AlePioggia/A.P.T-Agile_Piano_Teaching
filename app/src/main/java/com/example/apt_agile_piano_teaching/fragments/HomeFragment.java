@@ -27,15 +27,6 @@ import java.util.Map;
 
 public class HomeFragment extends Fragment {
 
-    private ListView mListView;
-    private StorageReference mStorageRef;
-    private FirebaseAuth mAuth = FirebaseAuth.getInstance();
-    private int[] images = {R.drawable.a, R.drawable.b, R.drawable.c};
-    private FirebaseFirestore mDbReference = FirebaseFirestore.getInstance();
-    private Map<String, String> studentsMap = new HashMap<>();
-    private String[] students = new String[10];
-    private String[] names = new String[10];
-
     public HomeFragment() {
     }
 
@@ -56,65 +47,7 @@ public class HomeFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_home, container, false);
-        mListView = view.findViewById(R.id.studentsListView);
-
-        mDbReference.collection("users").get().addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
-            @Override
-            public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
-                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
-                    queryDocumentSnapshots.getDocuments().forEach(document -> {
-                        studentsMap.put(document.get("mail").toString(), document.get("name") + " " + document.get("lastName"));
-                    });
-                }
-                students = new String[studentsMap.size()];
-                names = new String[studentsMap.size()];
-
-                for (int i = 0; i < students.length; i++) {
-                    students[i] = studentsMap.keySet().toArray()[i].toString();
-                    names[i] = studentsMap.get(students[i]);
-                }
-
-            }
-        });
-
-        StudentAdapter studentAdapter = new StudentAdapter();
-        mListView.setAdapter(studentAdapter);
-
         return view;
-    }
-
-    public class StudentAdapter extends BaseAdapter {
-
-        @Override
-        public int getCount() {
-            return students.length;
-        }
-
-        @Override
-        public Object getItem(int i) {
-            mStorageRef = FirebaseStorage.getInstance().getReference("uploads/" + students[i] + ".jpg");
-            return mStorageRef;
-        }
-
-        @Override
-        public long getItemId(int i) {
-            return i;
-        }
-
-        @Override
-        public View getView(int i, View view, ViewGroup viewGroup) {
-            System.out.print("Sono dentro la get view");
-
-            view = getActivity().getLayoutInflater().inflate(R.layout.card, viewGroup, false);
-            ImageView mImageView = view.findViewById(R.id.studentImageView);
-            TextView mTextView = view.findViewById(R.id.studentTextView);
-
-            mTextView.setText(names[i]);
-            mStorageRef = FirebaseStorage.getInstance().getReference("uploads/" + students[i] + ".jpg");
-            Glide.with(view).load(mStorageRef).into(mImageView);
-
-            return view;
-        }
     }
 
 }
