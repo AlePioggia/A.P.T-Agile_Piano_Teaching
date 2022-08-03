@@ -6,4 +6,19 @@
     android:layout_height="match_parent"
     tools:context=".activities.LessonsActivity">
 
+    <ListView
+        android:id="@+id/lessonsListView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginStart="15dp"
+        android:layout_marginTop="15dp"
+        android:layout_marginEnd="15dp"
+        android:layout_marginBottom="?attr/actionBarSize"
+        android:overScrollMode="ifContentScrolls"
+        app:flow_horizontalBias="0.5"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -27,8 +27,6 @@ public class StudentsActivity extends AppCompatActivity {
 
     private ListView mListView;
     private StorageReference mStorageRef;
-    private FirebaseAuth mAuth = FirebaseAuth.getInstance();
-    private int[] images = {R.drawable.a, R.drawable.b, R.drawable.c};
     private FirebaseFirestore mDbReference = FirebaseFirestore.getInstance();
     private Map<String, String> studentsMap = new HashMap<>();
     private String[] students = new String[10];

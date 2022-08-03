@@ -26,10 +26,19 @@ import java.util.Map;
 
 public class LessonsActivity extends AppCompatActivity {
 
+    private ListView mListView;
+    private StorageReference mStorageRef;
+    private FirebaseAuth mAuth = FirebaseAuth.getInstance();
+    private FirebaseFirestore mDbReference = FirebaseFirestore.getInstance();
+    private Map<String, String> studentsMap = new HashMap<>();
+    private String[] students = new String[10];
+    private String[] names = new String[10];
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_lessons);
+        mListView = findViewById(R.id.lessonsListView);
     }
 
 }
