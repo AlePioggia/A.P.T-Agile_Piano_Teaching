@@ -1,6 +1,8 @@
 package com.example.apt_agile_piano_teaching.models;
 
-public class Assignment {
+import java.io.Serializable;
+
+public class Assignment implements Serializable {
 
     private String exercise;
     private String bookName;

@@ -1,61 +1,102 @@
 package com.example.apt_agile_piano_teaching.activities;
 
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
 
 import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
-import android.view.ViewGroup;
-import android.widget.BaseAdapter;
-import android.widget.ImageView;
-import android.widget.ListView;
-import android.widget.TextView;
 
-import com.bumptech.glide.Glide;
-import com.example.apt_agile_piano_teaching.R;
-import com.example.apt_agile_piano_teaching.fragments.HomeFragment;
-import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.firebase.auth.FirebaseAuth;
+import com.example.apt_agile_piano_teaching.adapters.LessonAdapter;
+import com.example.apt_agile_piano_teaching.databinding.ActivityLessonsBinding;
+import com.example.apt_agile_piano_teaching.listeners.LessonListener;
+import com.example.apt_agile_piano_teaching.models.Assignment;
+import com.example.apt_agile_piano_teaching.models.Lesson;
 import com.google.firebase.firestore.FirebaseFirestore;
-import com.google.firebase.firestore.QuerySnapshot;
-import com.google.firebase.storage.FirebaseStorage;
-import com.google.firebase.storage.StorageReference;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
 
-import java.util.HashMap;
+import java.time.LocalDateTime;
+import java.time.ZoneId;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Date;
 import java.util.Map;
 
-public class LessonsActivity extends AppCompatActivity {
+public class LessonsActivity extends AppCompatActivity implements LessonListener {
 
-    private ListView mListView;
-    private StorageReference mStorageRef;
-    private FirebaseAuth mAuth = FirebaseAuth.getInstance();
-    private FirebaseFirestore mDbReference = FirebaseFirestore.getInstance();
-    private Map<String, String> lessonsMap = new HashMap<>();
-    private String[] lessons = new String[10];
-    private String[] names = new String[10];
+    private ActivityLessonsBinding binding;
+    private LessonAdapter lessonAdapter;
+    private FirebaseFirestore db;
+    private List<Lesson> lessons;
 
+    @RequiresApi(api = Build.VERSION_CODES.O)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_lessons);
-        mListView = findViewById(R.id.lessonsListView);
-        mDbReference.collection("users").get().addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
-            @Override
-            public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
-                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
-                    queryDocumentSnapshots.getDocuments().forEach(document -> {
-                        lessonsMap.put(document.get("mail").toString(), document.get("name") + " " + document.get("lastName"));
-                    });
-                }
-                lessons = new String[lessonsMap.size()];
-                names = new String[lessonsMap.size()];
+        binding = ActivityLessonsBinding.inflate(getLayoutInflater());
+        setContentView(binding.getRoot());
 
-                for (int i = 0; i < lessons.length; i++) {
-                    lessons[i] = lessonsMap.keySet().toArray()[i].toString();
-                    names[i] = lessonsMap.get(lessons[i]);
-                }
-            }
-        });
+        db = FirebaseFirestore.getInstance();
+
+        displayUsersAdapter();
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.O)
+    private void displayUsersAdapter() {
+        db.collection("lessons")
+                .get()
+                .addOnCompleteListener(task -> {
+                    if (task.isSuccessful() && task.getResult() != null) {
+                        lessons = new ArrayList<>();
+                        for (QueryDocumentSnapshot queryDocumentSnapshots : task.getResult()) {
+                            Map startDateMap = (Map) queryDocumentSnapshots.get("startDate");
+                            Map endDateMap = (Map) queryDocumentSnapshots.get("endDate");
+
+                            /*
+                            Lesson lesson = new Lesson(LocalDateTime.of((int) startDateMap.get("year"), (int) startDateMap.get("month")
+                                    , (int) startDateMap.get("dayOfMonth"), (int) startDateMap.get("hour"), (int) startDateMap.get("minute")),
+                                    LocalDateTime.of((int) endDateMap.get("year"), (int) endDateMap.get("month")
+                                            , (int) endDateMap.get("dayOfMonth"), (int) endDateMap.get("hour"), (Integer) endDateMap.get("minute")),
+                                    new ArrayList<Assignment>(),
+                                    "prova bifida");
+
+                             */
+                            int startDateYear = ((Number) startDateMap.get("year")).intValue();
+                            int startDayOfMonth = ((Number) startDateMap.get("dayOfMonth")).intValue();
+                            int startDateMonth = ((Number) startDateMap.get("monthValue")).intValue();
+                            int startDateHour = ((Number) startDateMap.get("hour")).intValue();
+                            int startDateMinute = ((Number) startDateMap.get("minute")).intValue();
+                            int endDateYear = ((Number) endDateMap.get("year")).intValue();
+                            int endDayOfMonth = ((Number) endDateMap.get("dayOfMonth")).intValue();
+                            int endDateMonth = ((Number) endDateMap.get("monthValue")).intValue();
+                            int endDateHour = ((Number) endDateMap.get("hour")).intValue();
+                            int endDateMinute = ((Number) endDateMap.get("minute")).intValue();
+                            Lesson lesson = new Lesson(LocalDateTime.of(startDateYear, startDateMonth, startDayOfMonth, startDateHour, startDateMinute),
+                                    LocalDateTime.of(endDateYear, endDateMonth, endDayOfMonth, endDateHour, endDateMinute),
+                                    new ArrayList<Assignment>(),
+                                    "prova bifida");
+                            lessons.add(lesson);
+                        }
+                        if (lessons.size() > 0) {
+                            lessonAdapter = new LessonAdapter(lessons, this);
+                            binding.lessonsRecyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
+                            binding.lessonsRecyclerView.setAdapter(lessonAdapter);
+                            binding.lessonsRecyclerView.setVisibility(View.VISIBLE);
+                        }
+                    }
+                });
+    }
+
+    @RequiresApi(api = Build.VERSION_CODES.O)
+    private LocalDateTime convertToLocalDateTime(Date date) {
+        return date.toInstant()
+                .atZone(ZoneId.systemDefault())
+                .toLocalDateTime();
+    }
+
+    @Override
+    public void onLessonClicked(Lesson lesson) {
+
+    }
 }

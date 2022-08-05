@@ -1,9 +1,10 @@
 package com.example.apt_agile_piano_teaching.models;
 
+import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.util.List;
 
-public class Lesson {
+public class Lesson implements Serializable {
     private LocalDateTime startDate;
     private LocalDateTime endDate;
     private List<Assignment> assignments;
@@ -15,6 +16,7 @@ public class Lesson {
         this.assignments = assignments;
         this.notes = notes;
     }
+
 
     public LocalDateTime getStartDate() {
         return startDate;

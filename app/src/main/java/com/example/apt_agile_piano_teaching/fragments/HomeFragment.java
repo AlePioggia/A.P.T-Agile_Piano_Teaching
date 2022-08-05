@@ -17,6 +17,7 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.example.apt_agile_piano_teaching.R;
+import com.example.apt_agile_piano_teaching.activities.LessonsActivity;
 import com.example.apt_agile_piano_teaching.activities.StudentsActivity;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
@@ -31,6 +32,7 @@ import java.util.Map;
 public class HomeFragment extends Fragment {
 
     private CardView mStudentsCardView;
+    private CardView mLessonsCardView;
 
     public HomeFragment() {
     }
@@ -53,11 +55,19 @@ public class HomeFragment extends Fragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_home, container, false);
         mStudentsCardView = view.findViewById(R.id.studentsCardView);
+        mLessonsCardView = view.findViewById(R.id.lessonsCardView);
 
         mStudentsCardView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 startActivity(new Intent(getActivity(), StudentsActivity.class));
+            }
+        });
+
+        mLessonsCardView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(getActivity(), LessonsActivity.class));
             }
         });
 
