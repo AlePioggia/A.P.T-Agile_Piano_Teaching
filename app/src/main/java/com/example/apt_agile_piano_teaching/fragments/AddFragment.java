@@ -134,7 +134,7 @@ public class AddFragment extends Fragment {
         lessonConfirmButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Lesson lesson = new Lesson(startDate, endDate, assignments, lessonNotes.getText().toString());
+                Lesson lesson = new Lesson(startDate, endDate, assignments, lessonNotes.getText().toString(), "");
 
                 mDbReference.collection("lessons")
                         .document()

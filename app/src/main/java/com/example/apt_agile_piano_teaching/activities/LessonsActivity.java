@@ -53,15 +53,8 @@ public class LessonsActivity extends AppCompatActivity implements LessonListener
                             Map startDateMap = (Map) queryDocumentSnapshots.get("startDate");
                             Map endDateMap = (Map) queryDocumentSnapshots.get("endDate");
 
-                            /*
-                            Lesson lesson = new Lesson(LocalDateTime.of((int) startDateMap.get("year"), (int) startDateMap.get("month")
-                                    , (int) startDateMap.get("dayOfMonth"), (int) startDateMap.get("hour"), (int) startDateMap.get("minute")),
-                                    LocalDateTime.of((int) endDateMap.get("year"), (int) endDateMap.get("month")
-                                            , (int) endDateMap.get("dayOfMonth"), (int) endDateMap.get("hour"), (Integer) endDateMap.get("minute")),
-                                    new ArrayList<Assignment>(),
-                                    "prova bifida");
+                            ArrayList<Assignment> assignments = (ArrayList<Assignment>) queryDocumentSnapshots.get("assignments");
 
-                             */
                             int startDateYear = ((Number) startDateMap.get("year")).intValue();
                             int startDayOfMonth = ((Number) startDateMap.get("dayOfMonth")).intValue();
                             int startDateMonth = ((Number) startDateMap.get("monthValue")).intValue();
@@ -74,12 +67,13 @@ public class LessonsActivity extends AppCompatActivity implements LessonListener
                             int endDateMinute = ((Number) endDateMap.get("minute")).intValue();
                             Lesson lesson = new Lesson(LocalDateTime.of(startDateYear, startDateMonth, startDayOfMonth, startDateHour, startDateMinute),
                                     LocalDateTime.of(endDateYear, endDateMonth, endDayOfMonth, endDateHour, endDateMinute),
-                                    new ArrayList<Assignment>(),
-                                    "prova bifida");
+                                    assignments,
+                                    "note",
+                                    "templates/piano.jpg");
                             lessons.add(lesson);
                         }
                         if (lessons.size() > 0) {
-                            lessonAdapter = new LessonAdapter(lessons, this);
+                            lessonAdapter = new LessonAdapter(lessons, this, getApplicationContext());
                             binding.lessonsRecyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
                             binding.lessonsRecyclerView.setAdapter(lessonAdapter);
                             binding.lessonsRecyclerView.setVisibility(View.VISIBLE);
