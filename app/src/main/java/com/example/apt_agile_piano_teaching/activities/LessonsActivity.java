@@ -4,6 +4,7 @@ import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
+import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
@@ -96,6 +97,8 @@ public class LessonsActivity extends AppCompatActivity implements LessonListener
 
     @Override
     public void onLessonClicked(Lesson lesson) {
-        Toast.makeText(this, lesson.getId(), Toast.LENGTH_SHORT).show();
+        Intent intent = new Intent(LessonsActivity.this, EditLessonsActivity.class);
+        intent.putExtra("lesson", lesson);
+        startActivity(intent);
     }
 }

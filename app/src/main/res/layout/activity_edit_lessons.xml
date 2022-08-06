@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".activities.EditLessonsActivity">
+
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Edit lesson"
+            android:textStyle="bold"
+            android:fontFamily="sans-serif-condensed"
+            android:textSize="18sp"
+            android:gravity="center" />
+
+        <androidx.appcompat.widget.AppCompatSpinner
+            android:id="@+id/editLessonSpinner"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:background="@android:drawable/btn_dropdown"
+            android:spinnerMode="dialog" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/editLessonDateBtn"
+            android:layout_marginTop="10dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Seleziona data" />
+
+        <TextView
+            android:id="@+id/editLessonShowDate"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="data"
+            android:fontFamily="sans-serif-condensed"
+            android:textSize="18sp"
+            android:gravity="center"
+            />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/editLessonStartDateBtn"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:text="Seleziona orario d'inizio" />
+
+        <TextView
+            android:id="@+id/editLessonShowStartDate"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="orario d'inizio"
+            android:fontFamily="sans-serif-condensed"
+            android:textSize="18sp"
+            android:gravity="center"
+            />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/editLessonEndTimeBtn"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:text="Seleziona orario di fine lezione" />
+
+        <TextView
+            android:id="@+id/editShowLessonEndDate"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="sans-serif-condensed"
+            android:textSize="18sp"
+            android:text="orario di fine"
+            android:gravity="center"
+            />
+
+        <TextView
+            android:layout_marginTop="10dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Compiti"
+            android:textStyle="bold"
+            android:fontFamily="sans-serif-condensed"
+            android:textSize="18sp"
+            android:gravity="center"
+            />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/editSelectAssignmentButton"
+            android:layout_marginTop="10dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Aggiungi un assignment"
+            />
+
+        <TextView
+            android:layout_marginTop="10dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Note"
+            android:textStyle="bold"
+            android:fontFamily="sans-serif-condensed"
+            android:textSize="18sp"
+            android:gravity="center"
+            />
+
+        <EditText
+            android:id="@+id/editLessonNotes"
+            android:hint="Spazio dedicato a delle eventuali note"
+            android:layout_marginTop="10dp"
+            android:height="200dp"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            />
+
+        <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+            android:layout_width="match_parent"
+            android:layout_marginTop="10dp"
+            android:layout_height="match_parent"
+            android:orientation="horizontal" >
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:layout_weight="1"
+                android:id="@+id/editLessonConfirmBtn"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="Conferma" />
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:layout_weight="1"
+                android:id="@+id/editLessonCancelBtn"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="Annulla" />
+        </LinearLayout>
+
+    </LinearLayout>
+
+</ScrollView>

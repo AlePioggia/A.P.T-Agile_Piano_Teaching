@@ -126,8 +126,7 @@ public class AddFragment extends Fragment {
 
                 }
                 String[] itemsArray = items.toArray(new String[items.size()]);
-                System.out.println(itemsArray.toString());
-                ArrayAdapter<String> lessonAdapter = new ArrayAdapter<>(getActivity(), android.R.layout.simple_spinner_dropdown_item,itemsArray);
+                ArrayAdapter<String> lessonAdapter = new ArrayAdapter<>(getActivity(), android.R.layout.simple_spinner_dropdown_item, itemsArray);
                 lessonSpinner.setAdapter(lessonAdapter);
             }
         });
