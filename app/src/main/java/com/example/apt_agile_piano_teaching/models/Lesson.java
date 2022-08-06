@@ -5,11 +5,38 @@ import java.time.LocalDateTime;
 import java.util.List;
 
 public class Lesson implements Serializable {
+    private String id;
+    private String studentMail;
     private LocalDateTime startDate;
     private LocalDateTime endDate;
     private List<Assignment> assignments;
     private String notes;
     private String templateImage;
+
+    public Lesson(String studentMail, LocalDateTime startDate, LocalDateTime endDate, List<Assignment> assignments, String notes, String templateImage) {
+        this.studentMail = studentMail;
+        this.startDate = startDate;
+        this.endDate = endDate;
+        this.assignments = assignments;
+        this.notes = notes;
+        this.templateImage = templateImage;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    public String getStudentMail() {
+        return studentMail;
+    }
+
+    public void setStudentMail(String studentMail) {
+        this.studentMail = studentMail;
+    }
 
     public String getTemplateImage() {
         return templateImage;
@@ -18,15 +45,6 @@ public class Lesson implements Serializable {
     public void setTemplateImage(String templateImage) {
         this.templateImage = templateImage;
     }
-
-    public Lesson(LocalDateTime startDate, LocalDateTime endDate, List<Assignment> assignments, String notes, String templateImage) {
-        this.startDate = startDate;
-        this.endDate = endDate;
-        this.assignments = assignments;
-        this.notes = notes;
-        this.templateImage = templateImage;
-    }
-
 
     public LocalDateTime getStartDate() {
         return startDate;

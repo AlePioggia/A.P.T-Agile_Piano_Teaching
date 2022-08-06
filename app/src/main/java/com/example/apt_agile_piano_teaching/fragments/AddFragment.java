@@ -43,6 +43,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.TimeZone;
+import java.util.UUID;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -124,17 +125,21 @@ public class AddFragment extends Fragment {
                     });
 
                 }
+                String[] itemsArray = items.toArray(new String[items.size()]);
+                System.out.println(itemsArray.toString());
+                ArrayAdapter<String> lessonAdapter = new ArrayAdapter<>(getActivity(), android.R.layout.simple_spinner_dropdown_item,itemsArray);
+                lessonSpinner.setAdapter(lessonAdapter);
             }
         });
-        String[] itemsArray = items.toArray(new String[items.size()]);
-        System.out.println(itemsArray.toString());
-        ArrayAdapter<String> lessonAdapter = new ArrayAdapter<>(getActivity(), android.R.layout.simple_spinner_dropdown_item,itemsArray);
-        lessonSpinner.setAdapter(lessonAdapter);
+
 
         lessonConfirmButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Lesson lesson = new Lesson(startDate, endDate, assignments, lessonNotes.getText().toString(), "");
+                Lesson lesson = new Lesson(lessonSpinner.getSelectedItem().toString(),startDate, endDate
+                        , assignments, lessonNotes.getText().toString(), "templates/piano.jpg");
+
+                lesson.setId(UUID.randomUUID().toString());
 
                 mDbReference.collection("lessons")
                         .document()
@@ -248,7 +253,7 @@ public class AddFragment extends Fragment {
          assignmentConfirmation = dialog.findViewById(R.id.assignmentConfirm);
          assignmentCancel = dialog.findViewById(R.id.assignmentCancel);
 
-         String[] items = new String[]{"Solfeggio", "Tecnica", "Motivetto", "Brano classico", "Brano(melodia)", "Brano(accompagnamento)"};
+        String[] items = new String[]{"Solfeggio", "Tecnica", "Motivetto", "Brano classico", "Brano(melodia)", "Brano(accompagnamento)"};
 
         ArrayAdapter<String> adapter = new ArrayAdapter<>(getActivity(), android.R.layout.simple_spinner_dropdown_item,items);
 
@@ -266,7 +271,6 @@ public class AddFragment extends Fragment {
                             assignmentPages.getText().toString(),
                             Integer.valueOf(assignmentBpm.getText().toString())));
                     Toast.makeText(getActivity(), assignments.toString(), Toast.LENGTH_SHORT).show();
-                    System.out.println(assignments.toString());
                     dialog.dismiss();
                 } else {
                     Toast.makeText(getActivity(), "Compila tutti i campi", Toast.LENGTH_SHORT).show();

@@ -7,6 +7,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Toast;
 
 import com.example.apt_agile_piano_teaching.adapters.LessonAdapter;
 import com.example.apt_agile_piano_teaching.databinding.ActivityLessonsBinding;
@@ -22,6 +23,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Date;
 import java.util.Map;
+import java.util.UUID;
 
 public class LessonsActivity extends AppCompatActivity implements LessonListener {
 
@@ -65,11 +67,14 @@ public class LessonsActivity extends AppCompatActivity implements LessonListener
                             int endDateMonth = ((Number) endDateMap.get("monthValue")).intValue();
                             int endDateHour = ((Number) endDateMap.get("hour")).intValue();
                             int endDateMinute = ((Number) endDateMap.get("minute")).intValue();
-                            Lesson lesson = new Lesson(LocalDateTime.of(startDateYear, startDateMonth, startDayOfMonth, startDateHour, startDateMinute),
+
+                            Lesson lesson = new Lesson(queryDocumentSnapshots.get("studentMail").toString(),LocalDateTime.of(startDateYear, startDateMonth, startDayOfMonth, startDateHour, startDateMinute),
                                     LocalDateTime.of(endDateYear, endDateMonth, endDayOfMonth, endDateHour, endDateMinute),
                                     assignments,
                                     "note",
                                     "templates/piano.jpg");
+                            lesson.setId(queryDocumentSnapshots.get("id").toString());
+
                             lessons.add(lesson);
                         }
                         if (lessons.size() > 0) {
@@ -91,6 +96,6 @@ public class LessonsActivity extends AppCompatActivity implements LessonListener
 
     @Override
     public void onLessonClicked(Lesson lesson) {
-
+        Toast.makeText(this, lesson.getId(), Toast.LENGTH_SHORT).show();
     }
 }
