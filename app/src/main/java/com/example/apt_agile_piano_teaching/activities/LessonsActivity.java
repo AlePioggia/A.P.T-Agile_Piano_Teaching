@@ -1,12 +1,16 @@
 package com.example.apt_agile_piano_teaching.activities;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
 import android.content.Intent;
+import android.net.Uri;
+import android.nfc.Tag;
 import android.os.Build;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
 
@@ -15,8 +19,15 @@ import com.example.apt_agile_piano_teaching.databinding.ActivityLessonsBinding;
 import com.example.apt_agile_piano_teaching.listeners.LessonListener;
 import com.example.apt_agile_piano_teaching.models.Assignment;
 import com.example.apt_agile_piano_teaching.models.Lesson;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageException;
+import com.google.firebase.storage.StorageMetadata;
 
 import java.time.LocalDateTime;
 import java.time.ZoneId;
@@ -31,11 +42,14 @@ public class LessonsActivity extends AppCompatActivity implements LessonListener
     private ActivityLessonsBinding binding;
     private LessonAdapter lessonAdapter;
     private FirebaseFirestore db;
+    private String mImageTemplateUri;
     private List<Lesson> lessons;
 
     @RequiresApi(api = Build.VERSION_CODES.O)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        mImageTemplateUri = "templates/" + FirebaseAuth.getInstance().getCurrentUser().getEmail() +
+                "_template.jpg";
         super.onCreate(savedInstanceState);
         binding = ActivityLessonsBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
@@ -73,7 +87,7 @@ public class LessonsActivity extends AppCompatActivity implements LessonListener
                                     LocalDateTime.of(endDateYear, endDateMonth, endDayOfMonth, endDateHour, endDateMinute),
                                     assignments,
                                     "note",
-                                    "templates/piano.jpg");
+                                    mImageTemplateUri);
                             lesson.setId(queryDocumentSnapshots.get("id").toString());
 
                             lessons.add(lesson);

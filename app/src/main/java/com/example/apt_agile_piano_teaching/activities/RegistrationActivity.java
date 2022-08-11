@@ -168,7 +168,7 @@ public class RegistrationActivity extends AppCompatActivity {
                 @Override
                 public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
                     Toast.makeText(RegistrationActivity.this, "Upload successful", Toast.LENGTH_SHORT).show();
-                    mStorageRef.getFile(new File("alexpioggia@gmail.com.jpg")).addOnSuccessListener(new OnSuccessListener<FileDownloadTask.TaskSnapshot>() {
+                    mStorageRef.getFile(new File(fileReference.toString())).addOnSuccessListener(new OnSuccessListener<FileDownloadTask.TaskSnapshot>() {
                         @Override
                         public void onSuccess(FileDownloadTask.TaskSnapshot taskSnapshot) {
                             Toast.makeText(RegistrationActivity.this, "successo!", Toast.LENGTH_SHORT).show();

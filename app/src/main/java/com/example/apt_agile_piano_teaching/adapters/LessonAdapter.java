@@ -48,7 +48,9 @@ public class LessonAdapter extends RecyclerView.Adapter<LessonAdapter.LessonHold
             binding.lessonStartDate.setText(lesson.getStartDate().format(new DateTimeFormatterBuilder().appendPattern("yyyy-MM-dd").toFormatter()));
             binding.lessonTime.setText(lesson.getStartDate().getHour() + " : " + lesson.getStartDate().getMinute());
             binding.lessonStudentMail.setText(lesson.getStudentMail());
-            Glide.with(context).load(FirebaseStorage.getInstance().getReference(lesson.getTemplateImage())).into(binding.lessonsImageView);
+            Glide.with(context).load(FirebaseStorage.getInstance()
+                    .getReference(lesson.getTemplateImage())).error(FirebaseStorage
+                    .getInstance().getReference("templates/piano.jpg")).into(binding.lessonsImageView);
             binding.getRoot().setOnClickListener(v -> lessonListener.onLessonClicked(lesson));
         }
     }

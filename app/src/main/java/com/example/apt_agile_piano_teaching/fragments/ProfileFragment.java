@@ -14,6 +14,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.example.apt_agile_piano_teaching.activities.ImagesActivity;
 import com.example.apt_agile_piano_teaching.activities.LessonsActivity;
 import com.example.apt_agile_piano_teaching.activities.LoginActivity;
 import com.example.apt_agile_piano_teaching.R;
@@ -73,7 +74,7 @@ public class ProfileFragment extends Fragment {
         mEditProfileBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(getActivity(), StudentsActivity.class));
+                startActivity(new Intent(getActivity(), ImagesActivity.class));
             }
         });
 
