@@ -19,6 +19,7 @@ import com.bumptech.glide.Glide;
 import com.example.apt_agile_piano_teaching.R;
 import com.example.apt_agile_piano_teaching.activities.ImagesActivity;
 import com.example.apt_agile_piano_teaching.activities.LessonsActivity;
+import com.example.apt_agile_piano_teaching.activities.LogsActivity;
 import com.example.apt_agile_piano_teaching.activities.StudentsActivity;
 import com.example.apt_agile_piano_teaching.databinding.FragmentHomeBinding;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -56,6 +57,7 @@ public class HomeFragment extends Fragment {
         // Inflate the layout for this fragment
         binding = FragmentHomeBinding.inflate(getLayoutInflater());
         View view = binding.getRoot();
+
         binding.studentsCardView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -76,6 +78,15 @@ public class HomeFragment extends Fragment {
                 startActivity(new Intent(getActivity(), ImagesActivity.class));
             }
         });
+
+        binding.userLogsCardView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(getActivity(), LogsActivity.class));
+            }
+        });
+
+
 
         return view;
     }

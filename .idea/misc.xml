@@ -5,6 +5,7 @@
       <map>
         <entry key="..\:/Users/alexp/AndroidStudioProjects/APTAgile_Piano_Teaching/app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.1665" />
         <entry key="..\:/Users/alexp/AndroidStudioProjects/APTAgile_Piano_Teaching/app/src/main/res/drawable/ic_baseline_add_circle_outline_24.xml" value="0.1665" />
+        <entry key="..\:/Users/alexp/AndroidStudioProjects/APTAgile_Piano_Teaching/app/src/main/res/drawable/ic_baseline_archive_24.xml" value="0.237" />
         <entry key="..\:/Users/alexp/AndroidStudioProjects/APTAgile_Piano_Teaching/app/src/main/res/drawable/ic_baseline_image_24.xml" value="0.1875" />
         <entry key="..\:/Users/alexp/AndroidStudioProjects/APTAgile_Piano_Teaching/app/src/main/res/drawable/ic_baseline_person_24.xml" value="0.1665" />
         <entry key="..\:/Users/alexp/AndroidStudioProjects/APTAgile_Piano_Teaching/app/src/main/res/drawable/ic_baseline_work_24.xml" value="0.1665" />
@@ -13,6 +14,7 @@
         <entry key="..\:/Users/alexp/AndroidStudioProjects/APTAgile_Piano_Teaching/app/src/main/res/layout/activity_images.xml" value="0.3625" />
         <entry key="..\:/Users/alexp/AndroidStudioProjects/APTAgile_Piano_Teaching/app/src/main/res/layout/activity_lessons.xml" value="0.1" />
         <entry key="..\:/Users/alexp/AndroidStudioProjects/APTAgile_Piano_Teaching/app/src/main/res/layout/activity_login.xml" value="0.1557377049180328" />
+        <entry key="..\:/Users/alexp/AndroidStudioProjects/APTAgile_Piano_Teaching/app/src/main/res/layout/activity_logs.xml" value="0.29739583333333336" />
         <entry key="..\:/Users/alexp/AndroidStudioProjects/APTAgile_Piano_Teaching/app/src/main/res/layout/activity_main.xml" value="0.1" />
         <entry key="..\:/Users/alexp/AndroidStudioProjects/APTAgile_Piano_Teaching/app/src/main/res/layout/activity_register.xml" value="0.2" />
         <entry key="..\:/Users/alexp/AndroidStudioProjects/APTAgile_Piano_Teaching/app/src/main/res/layout/activity_students.xml" value="0.21666666666666667" />
@@ -25,6 +27,7 @@
         <entry key="..\:/Users/alexp/AndroidStudioProjects/APTAgile_Piano_Teaching/app/src/main/res/layout/image_item.xml" value="0.3625" />
         <entry key="..\:/Users/alexp/AndroidStudioProjects/APTAgile_Piano_Teaching/app/src/main/res/layout/lesson_date_popup.xml" value="0.24895833333333334" />
         <entry key="..\:/Users/alexp/AndroidStudioProjects/APTAgile_Piano_Teaching/app/src/main/res/layout/lessons_card.xml" value="0.26145833333333335" />
+        <entry key="..\:/Users/alexp/AndroidStudioProjects/APTAgile_Piano_Teaching/app/src/main/res/layout/log_item.xml" value="0.29739583333333336" />
         <entry key="..\:/Users/alexp/AndroidStudioProjects/APTAgile_Piano_Teaching/app/src/main/res/menu/bottm_nav_menu.xml" value="0.3614583333333333" />
         <entry key="..\:/Users/alexp/AndroidStudioProjects/APTAgile_Piano_Teaching/app/src/main/res/menu/bottom_nav_menu.xml" value="0.18229166666666666" />
       </map>

@@ -1,9 +1,9 @@
 package com.example.apt_agile_piano_teaching.logger;
 
 public enum Action {
-    INSERT("ha inserito"),
-    DELETE("ha eliminato"),
-    UPDATE("ha modificato");
+    INSERT("inserimento"),
+    DELETE("eliminazione"),
+    UPDATE("modifica");
 
     private final String action;
 

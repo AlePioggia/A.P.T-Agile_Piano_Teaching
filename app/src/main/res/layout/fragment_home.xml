@@ -115,6 +115,7 @@
         </androidx.cardview.widget.CardView>
 
         <androidx.cardview.widget.CardView
+            android:id="@+id/userLogsCardView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_row="1"
@@ -133,11 +134,11 @@
                 <ImageView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:src="@drawable/ic_baseline_add_circle_outline_24"/>
+                    android:src="@drawable/ic_baseline_archive_24"/>
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="SOMETHING"
+                    android:text="USER LOGS"
                     android:textStyle="bold"
                     android:textAlignment="center"/>
             </LinearLayout>
