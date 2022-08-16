@@ -15,6 +15,7 @@ import com.google.firebase.firestore.QueryDocumentSnapshot;
 
 import java.lang.reflect.Array;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 public class LogsActivity extends AppCompatActivity {
@@ -43,7 +44,7 @@ public class LogsActivity extends AppCompatActivity {
                         logs = new ArrayList<>();
                         for (QueryDocumentSnapshot queryDocumentSnapshot : task.getResult()) {
                             UserLogTemplate userLog = new UserLogTemplate(queryDocumentSnapshot.getString("email"), queryDocumentSnapshot.getString("action"),
-                                    queryDocumentSnapshot.getString("category"), queryDocumentSnapshot.getString("message"));
+                                    queryDocumentSnapshot.getString("category"), queryDocumentSnapshot.getString("message"), queryDocumentSnapshot.getTimestamp("createdDateTime").toDate());
                             logs.add(userLog);
                         }
                         if (logs.size() > 0) {

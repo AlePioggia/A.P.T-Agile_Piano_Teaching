@@ -1,5 +1,8 @@
 package com.example.apt_agile_piano_teaching.models;
 
+import java.sql.Timestamp;
+import java.util.Date;
+
 public class User {
 
     private String mail;

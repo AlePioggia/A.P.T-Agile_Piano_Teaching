@@ -60,7 +60,7 @@ public class LogAdapter extends RecyclerView.Adapter<LogAdapter.LogHolder> {
             binding.showUser.setText(userLogTemplate.getEmail());
             binding.showAction.setText(userLogTemplate.getAction());
             binding.showCategory.setText(userLogTemplate.getCategory());
-            binding.showMessage.setText(userLogTemplate.getMessage());
+            binding.showLogTimestamp.setText(userLogTemplate.getCreatedDateTime().toString());
         }
     }
 }

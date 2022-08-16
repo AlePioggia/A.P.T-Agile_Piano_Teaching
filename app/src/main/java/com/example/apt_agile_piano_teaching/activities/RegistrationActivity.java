@@ -36,6 +36,7 @@ import com.google.firebase.storage.UploadTask;
 import com.squareup.picasso.Picasso;
 
 import java.io.File;
+import java.sql.Timestamp;
 
 public class RegistrationActivity extends AppCompatActivity {
 

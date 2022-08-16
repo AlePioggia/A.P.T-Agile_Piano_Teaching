@@ -18,6 +18,17 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <TextView
+            android:id="@+id/showLogTimestamp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="48"
+            android:textColor="@color/black"
+            android:textSize="15dp" />
+
+        <TextView
             android:id="@+id/showUser"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -26,18 +37,7 @@
             android:gravity="center"
             android:text="Naman Kumar Jha"
             android:textColor="@color/black"
-            android:textSize="20dp" />
-
-        <TextView
-            android:id="@+id/showAction"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_weight="1"
-            android:gravity="center"
-            android:text="40"
-            android:textColor="@color/black"
-            android:textSize="20dp" />
+            android:textSize="15dp" />
 
         <TextView
             android:id="@+id/showCategory"
@@ -48,18 +48,19 @@
             android:gravity="center"
             android:text="23"
             android:textColor="@color/black"
-            android:textSize="20dp" />
+            android:textSize="15dp" />
 
         <TextView
-            android:id="@+id/showMessage"
+            android:id="@+id/showAction"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_weight="1"
             android:gravity="center"
-            android:text="48"
+            android:text="40"
             android:textColor="@color/black"
-            android:textSize="20dp" />
+            android:textSize="15dp" />
+
 
     </LinearLayout>
 

@@ -3,7 +3,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@color/black">
 
     <!-- Linear layout of horizontal orientation -->
     <LinearLayout
@@ -14,6 +15,17 @@
         android:layout_marginTop="20dp"
         android:background="#D6EEEE">
 
+        <!-- icon for time taken column heading -->
+        <ImageView
+            android:id="@+id/showLogTimestamp"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_gravity="center"
+            android:src="@drawable/ic_baseline_access_time_24"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:padding="5dp"/>
+
         <!-- icon for user name column heading -->
         <ImageView
             android:id="@+id/showUser"
@@ -23,18 +35,6 @@
             android:layout_weight="1"
             android:gravity="center"
             android:src="@drawable/ic_baseline_person_24"
-            android:padding="5dp"/>
-
-
-        <!-- icon for number of attempted column heading -->
-        <ImageView
-            android:id="@+id/showAction"
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:layout_gravity="center"
-            android:layout_weight="1"
-            android:src="@drawable/ic_baseline_menu_book_24"
-            android:gravity="center"
             android:padding="5dp"/>
 
         <!-- icon for number of correct column heading -->
@@ -48,15 +48,17 @@
             android:gravity="center"
             android:padding="5dp"/>
 
-        <!-- icon for time taken column heading -->
+        <!-- icon for number of attempted column heading -->
         <ImageView
-            android:id="@+id/showMessage"
+            android:id="@+id/showAction"
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:layout_gravity="center"
             android:layout_weight="1"
+            android:src="@drawable/ic_baseline_menu_book_24"
             android:gravity="center"
             android:padding="5dp"/>
+
 
     </LinearLayout>
 
