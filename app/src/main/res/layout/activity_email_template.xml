@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center"
+    android:orientation="vertical"
+    android:padding="20dp"
+    tools:context=".activities.EmailTemplateActivity">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Mail template"
+        android:textStyle="bold"
+        android:fontFamily="sans-serif-condensed"
+        android:textSize="18sp"
+        android:gravity="center"
+        />
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/mailSubject"
+        android:padding="10dp"
+        android:layout_marginTop="10dp"
+        android:hint="Oggetto"
+        android:background="@drawable/bg_round" />
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:id="@+id/mailText"
+        android:padding="10dp"
+        android:layout_marginTop="10dp"
+        android:layout_weight="1"
+        android:hint="Messaggio"
+        android:background="@drawable/bg_round"
+        android:gravity="top"/>
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/saveTemplateBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Salva template"
+        android:gravity="center"
+        android:layout_gravity="center"
+        android:layout_marginTop="20dp"/>
+
+</LinearLayout>

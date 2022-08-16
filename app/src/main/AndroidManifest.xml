@@ -13,6 +13,9 @@
         android:theme="@style/Theme.APTAgile_Piano_Teaching"
         android:usesCleartextTraffic="true">
         <activity
+            android:name=".activities.EmailTemplateActivity"
+            android:exported="false" />
+        <activity
             android:name=".activities.LogsActivity"
             android:exported="false" />
         <activity

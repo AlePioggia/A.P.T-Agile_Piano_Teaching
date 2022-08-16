@@ -4,14 +4,17 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="..\:/Users/alexp/AndroidStudioProjects/APTAgile_Piano_Teaching/app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.1665" />
+        <entry key="..\:/Users/alexp/AndroidStudioProjects/APTAgile_Piano_Teaching/app/src/main/res/drawable/bg_round.xml" value="0.237" />
         <entry key="..\:/Users/alexp/AndroidStudioProjects/APTAgile_Piano_Teaching/app/src/main/res/drawable/ic_baseline_access_time_24.xml" value="0.237" />
         <entry key="..\:/Users/alexp/AndroidStudioProjects/APTAgile_Piano_Teaching/app/src/main/res/drawable/ic_baseline_add_circle_outline_24.xml" value="0.1665" />
         <entry key="..\:/Users/alexp/AndroidStudioProjects/APTAgile_Piano_Teaching/app/src/main/res/drawable/ic_baseline_archive_24.xml" value="0.237" />
+        <entry key="..\:/Users/alexp/AndroidStudioProjects/APTAgile_Piano_Teaching/app/src/main/res/drawable/ic_baseline_attach_email_24.xml" value="0.237" />
         <entry key="..\:/Users/alexp/AndroidStudioProjects/APTAgile_Piano_Teaching/app/src/main/res/drawable/ic_baseline_image_24.xml" value="0.1875" />
         <entry key="..\:/Users/alexp/AndroidStudioProjects/APTAgile_Piano_Teaching/app/src/main/res/drawable/ic_baseline_person_24.xml" value="0.1665" />
         <entry key="..\:/Users/alexp/AndroidStudioProjects/APTAgile_Piano_Teaching/app/src/main/res/drawable/ic_baseline_work_24.xml" value="0.1665" />
         <entry key="..\:/Users/alexp/AndroidStudioProjects/APTAgile_Piano_Teaching/app/src/main/res/drawable/ic_launcher_background.xml" value="0.1665" />
         <entry key="..\:/Users/alexp/AndroidStudioProjects/APTAgile_Piano_Teaching/app/src/main/res/layout/activity_edit_lessons.xml" value="0.16510416666666666" />
+        <entry key="..\:/Users/alexp/AndroidStudioProjects/APTAgile_Piano_Teaching/app/src/main/res/layout/activity_email_template.xml" value="0.3625" />
         <entry key="..\:/Users/alexp/AndroidStudioProjects/APTAgile_Piano_Teaching/app/src/main/res/layout/activity_images.xml" value="0.3625" />
         <entry key="..\:/Users/alexp/AndroidStudioProjects/APTAgile_Piano_Teaching/app/src/main/res/layout/activity_lessons.xml" value="0.1" />
         <entry key="..\:/Users/alexp/AndroidStudioProjects/APTAgile_Piano_Teaching/app/src/main/res/layout/activity_login.xml" value="0.1557377049180328" />

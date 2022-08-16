@@ -17,6 +17,7 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.example.apt_agile_piano_teaching.R;
+import com.example.apt_agile_piano_teaching.activities.EmailTemplateActivity;
 import com.example.apt_agile_piano_teaching.activities.ImagesActivity;
 import com.example.apt_agile_piano_teaching.activities.LessonsActivity;
 import com.example.apt_agile_piano_teaching.activities.LogsActivity;
@@ -83,6 +84,13 @@ public class HomeFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 startActivity(new Intent(getActivity(), LogsActivity.class));
+            }
+        });
+
+        binding.mailTemplateCardView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(getActivity(), EmailTemplateActivity.class));
             }
         });
 
