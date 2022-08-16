@@ -18,6 +18,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.apt_agile_piano_teaching.R;
+import com.example.apt_agile_piano_teaching.logger.Action;
+import com.example.apt_agile_piano_teaching.logger.CloudLogger;
 import com.example.apt_agile_piano_teaching.models.User;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
@@ -49,6 +51,7 @@ public class RegistrationActivity extends AppCompatActivity {
     private Button registerBtn;
     private TextView loginNowBtn;
     private ImageView profileImage;
+    private CloudLogger cloudLogger = new CloudLogger();
     private Uri mImageUri;
 
     private StorageReference mStorageRef;
@@ -101,9 +104,9 @@ public class RegistrationActivity extends AppCompatActivity {
                                 public void onComplete(@NonNull Task<AuthResult> task) {
                                     if (task.isSuccessful()) {
                                         // Sign in success, update UI with the signed-in user's information
-                                        FirebaseUser user = mAuth.getCurrentUser();
                                         Toast.makeText(RegistrationActivity.this, "Authentication success!",
                                                 Toast.LENGTH_SHORT).show();
+                                        cloudLogger.insertUserLog(mAuth.getCurrentUser().getEmail(), Action.INSERT);
                                         uploadImage();
                                         User currentUser = new User(mAuth.getCurrentUser().getEmail(), firstNameTxt, surnameTxt);
 
@@ -113,7 +116,7 @@ public class RegistrationActivity extends AppCompatActivity {
                                                 .addOnSuccessListener(new OnSuccessListener<Void>() {
                                                     @Override
                                                     public void onSuccess(Void unused) {
-                                                        Toast.makeText(RegistrationActivity.this, "inserimento nel db avvenuto correttamente!", Toast.LENGTH_SHORT).show();
+                                                        Toast.makeText(RegistrationActivity.this, "registrazione riuscita!", Toast.LENGTH_SHORT).show();
                                                     }
                                                 });
                                     } else {

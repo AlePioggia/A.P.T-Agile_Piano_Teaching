@@ -25,6 +25,9 @@ import android.widget.Toast;
 
 import com.example.apt_agile_piano_teaching.R;
 import com.example.apt_agile_piano_teaching.activities.RegistrationActivity;
+import com.example.apt_agile_piano_teaching.logger.Action;
+import com.example.apt_agile_piano_teaching.logger.Category;
+import com.example.apt_agile_piano_teaching.logger.CloudLogger;
 import com.example.apt_agile_piano_teaching.models.Assignment;
 import com.example.apt_agile_piano_teaching.models.Lesson;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -51,6 +54,8 @@ import java.util.UUID;
  * create an instance of this fragment.
  */
 public class AddFragment extends Fragment {
+
+    private final CloudLogger cloudLogger = new CloudLogger();
 
     private TextView showDate;
     private TextView showStartDate;
@@ -146,7 +151,7 @@ public class AddFragment extends Fragment {
                         .addOnSuccessListener(new OnSuccessListener<Void>() {
                             @Override
                             public void onSuccess(Void unused) {
-                                Toast.makeText(getActivity(), "inserimento nel db avvenuto correttamente!", Toast.LENGTH_SHORT).show();
+                                cloudLogger.insertLog(Category.LESSON, Action.INSERT);
                             }
                         });
             }
