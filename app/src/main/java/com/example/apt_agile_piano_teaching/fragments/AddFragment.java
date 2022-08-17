@@ -157,7 +157,9 @@ public class AddFragment extends Fragment {
                         .addOnSuccessListener(new OnSuccessListener<Void>() {
                             @Override
                             public void onSuccess(Void unused) {
-                                sendMail(lesson.getStudentMail(), mailSubject, mailText);
+                                if (mailSubject != null && mailText != null) {
+                                    sendMail(lesson.getStudentMail(), mailSubject, mailText);
+                                }
                                 cloudLogger.insertLog(Category.LESSON, Action.INSERT);
                                 Toast.makeText(getActivity(), "Inserimento della lezione avvenuto con successo", Toast.LENGTH_SHORT).show();
                             }
