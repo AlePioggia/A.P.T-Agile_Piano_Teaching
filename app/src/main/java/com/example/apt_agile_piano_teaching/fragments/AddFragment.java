@@ -3,6 +3,7 @@ package com.example.apt_agile_piano_teaching.fragments;
 import android.app.DatePickerDialog;
 import android.app.Dialog;
 import android.app.TimePickerDialog;
+import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 
@@ -32,6 +33,7 @@ import com.example.apt_agile_piano_teaching.models.Assignment;
 import com.example.apt_agile_piano_teaching.models.Lesson;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QuerySnapshot;
 
@@ -82,6 +84,9 @@ public class AddFragment extends Fragment {
     private LocalDateTime startDate;
     private LocalDateTime endDate;
 
+    private String mailSubject;
+    private String mailText;
+
     //Assignments
     private List<Assignment> assignments = new ArrayList<>();
 
@@ -120,6 +125,8 @@ public class AddFragment extends Fragment {
         showEndDate = view.findViewById(R.id.showEndDate);
         lessonSpinner = view.findViewById(R.id.lessonSpinner);
 
+        setMailData();
+
         List<String> items = new ArrayList<>();
         mDbReference.collection("users").get().addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
             @Override
@@ -136,7 +143,6 @@ public class AddFragment extends Fragment {
             }
         });
 
-
         lessonConfirmButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -151,7 +157,9 @@ public class AddFragment extends Fragment {
                         .addOnSuccessListener(new OnSuccessListener<Void>() {
                             @Override
                             public void onSuccess(Void unused) {
+                                sendMail(lesson.getStudentMail(), mailSubject, mailText);
                                 cloudLogger.insertLog(Category.LESSON, Action.INSERT);
+                                Toast.makeText(getActivity(), "Inserimento della lezione avvenuto con successo", Toast.LENGTH_SHORT).show();
                             }
                         });
             }
@@ -290,6 +298,29 @@ public class AddFragment extends Fragment {
          });
 
         dialog.show();
+    }
+
+    private void setMailData() {
+        mDbReference.collection("emailTemplates")
+                .document(mAuth.getCurrentUser().getUid())
+                .get()
+                .addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+                    @Override
+                    public void onSuccess(DocumentSnapshot documentSnapshot) {
+                        mailSubject = documentSnapshot.getString("subject");
+                        mailText = documentSnapshot.getString("text");
+                    }
+                });
+    }
+
+    private void sendMail(String receiver, String subject, String text) {
+        final Intent email = new Intent(Intent.ACTION_SEND);
+        email.putExtra(Intent.EXTRA_EMAIL, new String[]{receiver});
+        email.putExtra(Intent.EXTRA_SUBJECT, subject);
+        email.putExtra(Intent.EXTRA_TEXT, text);
+        //need this to prompts email client only
+        email.setType("message/rfc822");
+        startActivity(Intent.createChooser(email, "Choose an Email client :"));
     }
 
 }
