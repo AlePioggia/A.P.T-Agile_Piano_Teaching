@@ -118,7 +118,6 @@ public class AddFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         mailSettings = new Settings(getActivity(), Preference.EMAIL_PREFERENCE);
-        System.out.println(mailSettings.getPreference());
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_add, container, false);
         lessonConfirmButton = view.findViewById(R.id.lessonConfirmBtn);
@@ -140,7 +139,6 @@ public class AddFragment extends Fragment {
                     queryDocumentSnapshots.getDocuments().forEach(document -> {
                         items.add(document.get("mail").toString());
                     });
-
                 }
                 String[] itemsArray = items.toArray(new String[items.size()]);
                 ArrayAdapter<String> lessonAdapter = new ArrayAdapter<>(getActivity(), android.R.layout.simple_spinner_dropdown_item, itemsArray);

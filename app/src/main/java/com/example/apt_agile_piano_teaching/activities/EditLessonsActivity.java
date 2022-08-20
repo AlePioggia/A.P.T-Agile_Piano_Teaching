@@ -24,9 +24,10 @@ import java.util.Map;
 
 public class EditLessonsActivity extends AppCompatActivity {
 
-    ActivityEditLessonsBinding binding;
-    Lesson lesson;
+    private ActivityEditLessonsBinding binding;
+    private Lesson lesson;
     private FirebaseFirestore mDbReference = FirebaseFirestore.getInstance();
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,6 +43,20 @@ public class EditLessonsActivity extends AppCompatActivity {
                     @RequiresApi(api = Build.VERSION_CODES.O)
                     @Override
                     public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
+                        List<String> items = new ArrayList<>();
+
+                        mDbReference.collection("users").get().addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
+                            @Override
+                            public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
+                                for(QueryDocumentSnapshot queryDocumentSnapshot : queryDocumentSnapshots) {
+                                    items.add(queryDocumentSnapshot.getString("mail"));
+                                }
+                                String[] itemsArray = items.toArray(new String[items.size()]);
+                                ArrayAdapter<String> editLessonAdapter = new ArrayAdapter<>(EditLessonsActivity.this, android.R.layout.simple_spinner_dropdown_item, itemsArray);
+                                binding.editLessonSpinner.setAdapter(editLessonAdapter);
+                            }
+                        });
+
                         for (QueryDocumentSnapshot queryDocumentSnapshot : queryDocumentSnapshots) {
                             if (queryDocumentSnapshot.get("id").equals(lesson.getId())) {
                                 binding.editLessonShowDate.setText(lesson.getStartDate().format(new DateTimeFormatterBuilder().appendPattern("yyyy-MM-dd").toFormatter()));
