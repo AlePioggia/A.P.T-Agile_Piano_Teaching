@@ -17,6 +17,7 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.example.apt_agile_piano_teaching.R;
+import com.example.apt_agile_piano_teaching.activities.ChatbotActivity;
 import com.example.apt_agile_piano_teaching.activities.EmailTemplateActivity;
 import com.example.apt_agile_piano_teaching.activities.ImagesActivity;
 import com.example.apt_agile_piano_teaching.activities.LessonsActivity;
@@ -24,6 +25,7 @@ import com.example.apt_agile_piano_teaching.activities.LogsActivity;
 import com.example.apt_agile_piano_teaching.activities.SettingsActivity;
 import com.example.apt_agile_piano_teaching.activities.StudentsActivity;
 import com.example.apt_agile_piano_teaching.databinding.FragmentHomeBinding;
+import com.example.apt_agile_piano_teaching.utils.Settings;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.FirebaseFirestore;
