@@ -168,6 +168,7 @@
         </androidx.cardview.widget.CardView>
 
         <androidx.cardview.widget.CardView
+            android:id="@+id/settingsCardView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_row="2"
@@ -186,11 +187,11 @@
                 <ImageView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:src="@drawable/ic_baseline_add_circle_outline_24"/>
+                    android:src="@drawable/ic_baseline_settings_24" />
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="SOMETHING"
+                    android:text="SETTINGS"
                     android:textStyle="bold"
                     android:textAlignment="center"/>
             </LinearLayout>

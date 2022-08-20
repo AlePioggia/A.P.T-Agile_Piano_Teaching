@@ -13,10 +13,13 @@ import android.view.View;
 import android.webkit.MimeTypeMap;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
 import com.example.apt_agile_piano_teaching.R;
 import com.example.apt_agile_piano_teaching.databinding.ActivityImagesBinding;
 import com.example.apt_agile_piano_teaching.databinding.ActivityLessonsBinding;
 import com.example.apt_agile_piano_teaching.models.ImageUpload;
+import com.example.apt_agile_piano_teaching.utils.Preference;
+import com.example.apt_agile_piano_teaching.utils.Settings;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
@@ -50,6 +53,15 @@ public class ImagesActivity extends AppCompatActivity {
         mStorageRef = FirebaseStorage.getInstance().getReference("templates");
         mDatabaseRef = FirebaseDatabase.getInstance().getReference();
         mFirestoreRef = FirebaseFirestore.getInstance();
+
+        Settings settings = new Settings(this, Preference.IMAGE_TEMPLATE_PREFERENCE);
+        if (settings.getPreference()) {
+            Glide.with(this).load(FirebaseStorage.getInstance()
+                    .getReference("templates/" + FirebaseAuth.getInstance().getCurrentUser().getEmail() + "_template.jpg")).error(FirebaseStorage
+                    .getInstance().getReference("templates/piano.jpg")).into(binding.imageView);
+        } else {
+            Glide.with(this).load(FirebaseStorage.getInstance().getReference("templates/piano.jpg")).into(binding.imageView);
+        }
 
         binding.btnChooseFile.setOnClickListener(new View.OnClickListener() {
             @Override

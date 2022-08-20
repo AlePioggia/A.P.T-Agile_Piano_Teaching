@@ -21,6 +21,7 @@ import com.example.apt_agile_piano_teaching.activities.EmailTemplateActivity;
 import com.example.apt_agile_piano_teaching.activities.ImagesActivity;
 import com.example.apt_agile_piano_teaching.activities.LessonsActivity;
 import com.example.apt_agile_piano_teaching.activities.LogsActivity;
+import com.example.apt_agile_piano_teaching.activities.SettingsActivity;
 import com.example.apt_agile_piano_teaching.activities.StudentsActivity;
 import com.example.apt_agile_piano_teaching.databinding.FragmentHomeBinding;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -94,7 +95,12 @@ public class HomeFragment extends Fragment {
             }
         });
 
-
+        binding.settingsCardView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(getActivity(), SettingsActivity.class));
+            }
+        });
 
         return view;
     }

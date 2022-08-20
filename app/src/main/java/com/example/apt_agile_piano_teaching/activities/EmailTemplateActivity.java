@@ -6,9 +6,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Toast;
 
-import com.example.apt_agile_piano_teaching.R;
 import com.example.apt_agile_piano_teaching.databinding.ActivityEmailTemplateBinding;
-import com.example.apt_agile_piano_teaching.databinding.ActivityImagesBinding;
 import com.example.apt_agile_piano_teaching.models.EmailTemplate;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;

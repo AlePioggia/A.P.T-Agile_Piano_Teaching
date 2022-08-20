@@ -31,6 +31,8 @@ import com.example.apt_agile_piano_teaching.logger.Category;
 import com.example.apt_agile_piano_teaching.logger.CloudLogger;
 import com.example.apt_agile_piano_teaching.models.Assignment;
 import com.example.apt_agile_piano_teaching.models.Lesson;
+import com.example.apt_agile_piano_teaching.utils.Preference;
+import com.example.apt_agile_piano_teaching.utils.Settings;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentSnapshot;
@@ -58,6 +60,7 @@ import java.util.UUID;
 public class AddFragment extends Fragment {
 
     private final CloudLogger cloudLogger = new CloudLogger();
+    private Settings mailSettings;
 
     private TextView showDate;
     private TextView showStartDate;
@@ -114,6 +117,8 @@ public class AddFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+        mailSettings = new Settings(getActivity(), Preference.EMAIL_PREFERENCE);
+        System.out.println(mailSettings.getPreference());
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_add, container, false);
         lessonConfirmButton = view.findViewById(R.id.lessonConfirmBtn);
@@ -157,7 +162,9 @@ public class AddFragment extends Fragment {
                         .addOnSuccessListener(new OnSuccessListener<Void>() {
                             @Override
                             public void onSuccess(Void unused) {
-                                if (mailSubject != null && mailText != null) {
+                                if (mailSubject != null && mailText != null
+                                && mailSettings.getPreference() == true) {
+                                    Toast.makeText(getActivity(), "value: " + mailSettings.getPreference(), Toast.LENGTH_SHORT).show();
                                     sendMail(lesson.getStudentMail(), mailSubject, mailText);
                                 }
                                 cloudLogger.insertLog(Category.LESSON, Action.INSERT);
