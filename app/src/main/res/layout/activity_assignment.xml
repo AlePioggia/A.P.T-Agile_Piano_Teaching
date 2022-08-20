@@ -1,0 +1,83 @@
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/black">
+
+    <!-- Linear layout of horizontal orientation -->
+    <LinearLayout
+        android:id="@+id/ll2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="20dp"
+        android:background="#D6EEEE">
+
+        <!-- icon for time taken column heading -->
+        <TextView
+            android:id="@+id/showAssignmentExerciseType"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_gravity="center"
+            android:text="Esercizio"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:padding="5dp"/>
+
+        <!-- icon for user name column heading -->
+        <TextView
+            android:id="@+id/showAssignmentBook"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:text="Libro"
+            android:layout_gravity="center"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:padding="5dp"/>
+
+        <!-- icon for number of correct column heading -->
+        <TextView
+            android:id="@+id/showAssignmentPages"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_gravity="center"
+            android:layout_weight="1"
+            android:text="Pagine"
+            android:gravity="center"
+            android:padding="5dp"/>
+
+        <!-- icon for number of attempted column heading -->
+        <TextView
+            android:id="@+id/showAssignmentBpm"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_gravity="center"
+            android:layout_weight="1"
+            android:text="Bpm"
+            android:gravity="center"
+            android:padding="5dp"/>
+
+        <ImageView
+            android:id="@+id/showDeleteBtn"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_gravity="center"
+            android:layout_weight="1"
+            android:src="@drawable/ic_baseline_delete_24"
+            android:gravity="center"
+            android:padding="5dp"/>
+
+
+    </LinearLayout>
+
+    <!-- Recycler view for populating data in a table format -->
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/ll2"
+        android:background="#D6EEEE" />
+
+</RelativeLayout>
