@@ -85,7 +85,6 @@ public class LessonsActivity extends AppCompatActivity implements LessonListener
 
                             Lesson lesson = new Lesson(queryDocumentSnapshots.get("studentMail").toString(),LocalDateTime.of(startDateYear, startDateMonth, startDayOfMonth, startDateHour, startDateMinute),
                                     LocalDateTime.of(endDateYear, endDateMonth, endDayOfMonth, endDateHour, endDateMinute),
-                                    assignments,
                                     "note",
                                     mImageTemplateUri);
                             lesson.setId(queryDocumentSnapshots.get("id").toString());

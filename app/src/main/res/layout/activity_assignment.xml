@@ -60,14 +60,15 @@
             android:padding="5dp"/>
 
         <ImageView
+            android:src="@drawable/ic_baseline_delete_24"
             android:id="@+id/showDeleteBtn"
             android:layout_width="match_parent"
-            android:layout_height="50dp"
+            android:layout_height="match_parent"
             android:layout_gravity="center"
             android:layout_weight="1"
-            android:src="@drawable/ic_baseline_delete_24"
             android:gravity="center"
-            android:padding="5dp"/>
+            android:text="elimina"
+            android:textColor="@color/black"/>
 
 
     </LinearLayout>

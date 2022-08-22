@@ -9,15 +9,13 @@ public class Lesson implements Serializable {
     private String studentMail;
     private LocalDateTime startDate;
     private LocalDateTime endDate;
-    private List<Assignment> assignments;
     private String notes;
     private String templateImage;
 
-    public Lesson(String studentMail, LocalDateTime startDate, LocalDateTime endDate, List<Assignment> assignments, String notes, String templateImage) {
+    public Lesson(String studentMail, LocalDateTime startDate, LocalDateTime endDate, String notes, String templateImage) {
         this.studentMail = studentMail;
         this.startDate = startDate;
         this.endDate = endDate;
-        this.assignments = assignments;
         this.notes = notes;
         this.templateImage = templateImage;
     }
@@ -62,14 +60,6 @@ public class Lesson implements Serializable {
         this.endDate = endDate;
     }
 
-    public List<Assignment> getAssignments() {
-        return assignments;
-    }
-
-    public void setAssignments(List<Assignment> assignments) {
-        this.assignments = assignments;
-    }
-
     public String getNotes() {
         return notes;
     }
@@ -83,7 +73,6 @@ public class Lesson implements Serializable {
         return "Lesson{" +
                 "startDate=" + startDate +
                 ", endDate=" + endDate +
-                ", assignments=" + assignments +
                 ", notes='" + notes + '\'' +
                 ", templateImage='" + templateImage + '\'' +
                 '}';

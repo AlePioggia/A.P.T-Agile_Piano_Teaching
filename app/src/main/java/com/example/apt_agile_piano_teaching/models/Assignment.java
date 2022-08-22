@@ -4,16 +4,45 @@ import java.io.Serializable;
 
 public class Assignment implements Serializable {
 
+    private String id;
+    private String lessonId;
     private String exercise;
     private String bookName;
     private String pages;
     private double bpm;
 
-    public Assignment(String exercise, String bookName, String pages, double bpm) {
+    public Assignment(String id, String lessonId, String exercise, String bookName, String pages, double bpm) {
+        this.id = id;
+        this.lessonId = lessonId;
         this.exercise = exercise;
         this.bookName = bookName;
         this.pages = pages;
         this.bpm = bpm;
+    }
+
+    public Assignment(String exercise, String bookName, String pages, double bpm) {
+        this.id = "";
+        this.lessonId = "";
+        this.exercise = exercise;
+        this.bookName = bookName;
+        this.pages = pages;
+        this.bpm = bpm;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    public String getLessonId() {
+        return lessonId;
+    }
+
+    public void setLessonId(String lessonId) {
+        this.lessonId = lessonId;
     }
 
     public String getBookName() {

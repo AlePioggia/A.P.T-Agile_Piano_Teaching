@@ -8,18 +8,21 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.apt_agile_piano_teaching.databinding.AssignmentItemBinding;
+import com.example.apt_agile_piano_teaching.listeners.AssignmentListener;
 import com.example.apt_agile_piano_teaching.models.Assignment;
 
 import java.util.ArrayList;
 
-public class AssignmentAdapter extends RecyclerView.Adapter<AssignmentAdapter.AssignmentHolder> {
+public class AssignmentAdapter extends RecyclerView.Adapter<AssignmentAdapter.AssignmentHolder>{
 
-    Context context;
-    ArrayList<Assignment> assignments;
+    private Context context;
+    private AssignmentListener assignmentListener;
+    private ArrayList<Assignment> assignments;
 
-    public AssignmentAdapter(Context context, ArrayList<Assignment> assignments) {
+    public AssignmentAdapter(Context context, ArrayList<Assignment> assignments, AssignmentListener assignmentListener) {
         this.context = context;
         this.assignments = assignments;
+        this.assignmentListener = assignmentListener;
     }
 
     @NonNull
@@ -57,6 +60,7 @@ public class AssignmentAdapter extends RecyclerView.Adapter<AssignmentAdapter.As
             binding.showAssignmentBook.setText(assignment.getBookName());
             binding.showAssignmentBpm.setText(String.valueOf(assignment.getBpm()));
             binding.showAssignmentPages.setText(assignment.getPages());
+            binding.showDeleteBtn.setOnClickListener(v -> assignmentListener.onAssignmentClicked(assignment));
         }
 
     }

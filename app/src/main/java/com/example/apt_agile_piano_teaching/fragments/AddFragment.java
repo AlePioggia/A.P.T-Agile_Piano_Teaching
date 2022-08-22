@@ -150,9 +150,20 @@ public class AddFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 Lesson lesson = new Lesson(lessonSpinner.getSelectedItem().toString(),startDate, endDate
-                        , assignments, lessonNotes.getText().toString(), "templates/piano.jpg");
+                        , lessonNotes.getText().toString(), "templates/piano.jpg");
 
                 lesson.setId(UUID.randomUUID().toString());
+
+                for (Assignment assignment: assignments) {
+                    final String assignmentId = UUID.randomUUID().toString();
+
+                    assignment.setLessonId(lesson.getId());
+                    assignment.setId(assignmentId);
+
+                    mDbReference.collection("assignments")
+                            .document(assignmentId)
+                            .set(assignment);
+                }
 
                 mDbReference.collection("lessons")
                         .document()
@@ -284,12 +295,16 @@ public class AddFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 if (isValid) {
-                    assignments.add(new Assignment(
+                    final Assignment assignment = new Assignment(
                             assignmentSpinner.getSelectedItem().toString(),
                             assignmentBookName.getText().toString(),
                             assignmentPages.getText().toString(),
-                            Integer.valueOf(assignmentBpm.getText().toString())));
+                            Integer.valueOf(assignmentBpm.getText().toString()));
+
+                    assignments.add(assignment);
+
                     Toast.makeText(getActivity(), assignments.toString(), Toast.LENGTH_SHORT).show();
+
                     dialog.dismiss();
                 } else {
                     Toast.makeText(getActivity(), "Compila tutti i campi", Toast.LENGTH_SHORT).show();
