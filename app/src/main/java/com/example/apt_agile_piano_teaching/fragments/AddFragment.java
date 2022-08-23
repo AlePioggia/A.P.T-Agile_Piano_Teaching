@@ -166,7 +166,7 @@ public class AddFragment extends Fragment {
                 }
 
                 mDbReference.collection("lessons")
-                        .document()
+                        .document(lesson.getId())
                         .set(lesson)
                         .addOnSuccessListener(new OnSuccessListener<Void>() {
                             @Override

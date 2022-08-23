@@ -22,6 +22,7 @@ import com.example.apt_agile_piano_teaching.models.Assignment;
 import com.example.apt_agile_piano_teaching.models.Lesson;
 import com.example.apt_agile_piano_teaching.models.UserLogTemplate;
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.DocumentSnapshot;
@@ -50,12 +51,12 @@ public class AssignmentActivity extends AppCompatActivity implements AssignmentL
         setContentView(binding.getRoot());
 
         lesson = (Lesson) getIntent().getExtras().get("lesson");
+        assignments = (ArrayList<Assignment>) getIntent().getExtras().get("assignments");
 
         mDbReference.collection("assignments")
                 .get()
                 .addOnCompleteListener(task -> {
                     if (task.isSuccessful() && task.getResult() != null) {
-                        assignments = new ArrayList<>();
                         for (QueryDocumentSnapshot queryDocumentSnapshot : task.getResult()) {
                             if (queryDocumentSnapshot.getString("lessonId").equals(lesson.getId())) {
                                 Assignment assignment = new Assignment(queryDocumentSnapshot.getString("id"), queryDocumentSnapshot.getString("lessonId")
@@ -76,7 +77,12 @@ public class AssignmentActivity extends AppCompatActivity implements AssignmentL
 
     @Override
     public void onAssignmentClicked(Assignment assignment) {
-        mDbReference.collection("assignments").document(assignment.getId()).delete();
+        mDbReference.collection("assignments").document(assignment.getId()).delete().addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+                assignments.remove(assignment);
+            }
+        });
         finish();
         overridePendingTransition(0, 0);
         startActivity(getIntent());
