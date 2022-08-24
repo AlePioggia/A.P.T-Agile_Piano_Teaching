@@ -53,26 +53,36 @@ public class AssignmentActivity extends AppCompatActivity implements AssignmentL
         lesson = (Lesson) getIntent().getExtras().get("lesson");
         assignments = (ArrayList<Assignment>) getIntent().getExtras().get("assignments");
 
-        mDbReference.collection("assignments")
-                .get()
-                .addOnCompleteListener(task -> {
-                    if (task.isSuccessful() && task.getResult() != null) {
-                        for (QueryDocumentSnapshot queryDocumentSnapshot : task.getResult()) {
-                            if (queryDocumentSnapshot.getString("lessonId").equals(lesson.getId())) {
-                                Assignment assignment = new Assignment(queryDocumentSnapshot.getString("id"), queryDocumentSnapshot.getString("lessonId")
-                                        ,queryDocumentSnapshot.getString("exercise"), queryDocumentSnapshot.getString("bookName"),
-                                        queryDocumentSnapshot.getString("pages"), queryDocumentSnapshot.getDouble("bpm"));
-                                assignments.add(assignment);
+        if (lesson != null) {
+            mDbReference.collection("assignments")
+                    .get()
+                    .addOnCompleteListener(task -> {
+                        if (task.isSuccessful() && task.getResult() != null) {
+                            for (QueryDocumentSnapshot queryDocumentSnapshot : task.getResult()) {
+                                if (queryDocumentSnapshot.getString("lessonId").equals(lesson.getId())) {
+                                    Assignment assignment = new Assignment(queryDocumentSnapshot.getString("id"), queryDocumentSnapshot.getString("lessonId")
+                                            ,queryDocumentSnapshot.getString("exercise"), queryDocumentSnapshot.getString("bookName"),
+                                            queryDocumentSnapshot.getString("pages"), queryDocumentSnapshot.getDouble("bpm"));
+                                    assignments.add(assignment);
+                                }
+                            }
+                            if (assignments.size() > 0) {
+                                adapter = new AssignmentAdapter(getApplicationContext(), assignments, this);
+                                binding.recyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
+                                binding.recyclerView.setAdapter(adapter);
+                                binding.recyclerView.setVisibility(View.VISIBLE);
                             }
                         }
-                        if (assignments.size() > 0) {
-                            adapter = new AssignmentAdapter(getApplicationContext(), assignments, this);
-                            binding.recyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
-                            binding.recyclerView.setAdapter(adapter);
-                            binding.recyclerView.setVisibility(View.VISIBLE);
-                        }
-                    }
-                });
+                    });
+        } else {
+            if (assignments.size() > 0) {
+                adapter = new AssignmentAdapter(getApplicationContext(), assignments, this);
+                binding.recyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
+                binding.recyclerView.setAdapter(adapter);
+                binding.recyclerView.setVisibility(View.VISIBLE);
+            }
+        }
+
     }
 
     @Override

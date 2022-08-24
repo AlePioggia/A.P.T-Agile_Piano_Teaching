@@ -114,4 +114,13 @@ public class LessonsActivity extends AppCompatActivity implements LessonListener
         intent.putExtra("lesson", lesson);
         startActivity(intent);
     }
+
+    @Override
+    public void onDeleteClicked(Lesson lesson) {
+        db.collection("lessons").document(lesson.getId()).delete();
+        finish();
+        overridePendingTransition(0, 0);
+        startActivity(getIntent());
+        overridePendingTransition(0, 0);
+    }
 }

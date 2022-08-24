@@ -19,12 +19,15 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.TimePicker;
 import android.widget.Toast;
 
 import com.example.apt_agile_piano_teaching.R;
+import com.example.apt_agile_piano_teaching.activities.AssignmentActivity;
+import com.example.apt_agile_piano_teaching.activities.EditLessonsActivity;
 import com.example.apt_agile_piano_teaching.activities.RegistrationActivity;
 import com.example.apt_agile_piano_teaching.logger.Action;
 import com.example.apt_agile_piano_teaching.logger.Category;
@@ -69,7 +72,8 @@ public class AddFragment extends Fragment {
     private Button lessonDateBtn;
     private Button lessonStartTimeButton;
     private Button lessonEndTimeButton;
-    private Button assignmentButton;
+    private ImageView assignmentButton;
+    private Button showAssignmentsButton;
     private Button lessonConfirmButton;
     private Button cancelButton;
 
@@ -91,7 +95,7 @@ public class AddFragment extends Fragment {
     private String mailText;
 
     //Assignments
-    private List<Assignment> assignments = new ArrayList<>();
+    private ArrayList<Assignment> assignments = new ArrayList<>();
 
     //Firebase
     private FirebaseAuth mAuth = FirebaseAuth.getInstance();
@@ -128,6 +132,7 @@ public class AddFragment extends Fragment {
         showStartDate = view.findViewById(R.id.showStartDate);
         showEndDate = view.findViewById(R.id.showEndDate);
         lessonSpinner = view.findViewById(R.id.lessonSpinner);
+        showAssignmentsButton = view.findViewById(R.id.showAssignmentsButton);
 
         setMailData();
 
@@ -257,6 +262,15 @@ public class AddFragment extends Fragment {
                     Toast.makeText(getActivity(), "Selezionare prima l'orario d'inizio!", Toast.LENGTH_SHORT).show();
                 }
 
+            }
+        });
+
+        showAssignmentsButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getActivity(), AssignmentActivity.class);
+                intent.putExtra("assignments", assignments);
+                startActivity(intent);
             }
         });
 

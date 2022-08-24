@@ -51,7 +51,8 @@ public class LessonAdapter extends RecyclerView.Adapter<LessonAdapter.LessonHold
             Glide.with(context).load(FirebaseStorage.getInstance()
                     .getReference(lesson.getTemplateImage())).error(FirebaseStorage
                     .getInstance().getReference("templates/piano.jpg")).into(binding.lessonsImageView);
-            binding.getRoot().setOnClickListener(v -> lessonListener.onLessonClicked(lesson));
+            binding.lessonsImageView.setOnClickListener(v -> lessonListener.onLessonClicked(lesson));
+            binding.deleteIcon.setOnClickListener(v -> lessonListener.onDeleteClicked(lesson));
         }
     }
 

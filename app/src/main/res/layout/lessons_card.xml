@@ -10,20 +10,20 @@
         android:layout_height="match_parent">
 
         <ImageView
+            android:id="@+id/lessonsImageView"
             android:layout_width="match_parent"
             android:layout_height="260dp"
-            android:scaleType="centerCrop"
-            android:id="@+id/lessonsImageView"/>
+            android:scaleType="centerCrop"></ImageView>
 
         <TextView
+            android:id="@+id/lessonStudentMail"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="24sp"
-            android:textStyle="bold"
             android:layout_below="@id/lessonsImageView"
-            android:text="Data"
             android:layout_centerHorizontal="true"
-            android:id="@+id/lessonStudentMail" />
+            android:text="Data"
+            android:textSize="24sp"
+            android:textStyle="bold" />
 
         <TextView
             android:layout_marginTop="10dp"
@@ -46,6 +46,14 @@
             android:text="Coding stuff"
             android:layout_centerHorizontal="true"
             android:id="@+id/lessonTime" />
+
+        <ImageView
+            android:id="@+id/deleteIcon"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_centerHorizontal="true"
+            android:layout_below="@+id/lessonTime"
+            android:src="@drawable/ic_baseline_delete_24"></ImageView>
     </RelativeLayout>
 
 </androidx.cardview.widget.CardView>

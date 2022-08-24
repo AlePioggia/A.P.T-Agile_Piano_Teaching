@@ -83,10 +83,10 @@ public class HomeFragment extends Fragment {
             }
         });
 
-        binding.userLogsCardView.setOnClickListener(new View.OnClickListener() {
+        binding.chatBotCardView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(getActivity(), LogsActivity.class));
+                startActivity(new Intent(getActivity(), ChatbotActivity.class));
             }
         });
 
