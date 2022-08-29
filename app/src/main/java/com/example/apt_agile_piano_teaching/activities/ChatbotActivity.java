@@ -51,12 +51,25 @@ public class ChatbotActivity extends AppCompatActivity {
     private void getResponse(String message) {
         chats.add(new Chat(message, USER_KEY));
         adapter.notifyDataSetChanged();
-        if (message.equals("accordo maggiore")) {
+        if (message.toLowerCase().equals("accordo maggiore")) {
             chats.add(new Chat("La triade di accordo maggiore " +
                     "è composta da 3 note, la prima è la nota selezionata (ad esempio LA), " +
-                    "la seconda si calcola sommando 2 semitoni e la terza 3 semitoni a partire dalla seconda", BOT_KEY));
+                    "la seconda si calcola sommando 3 semitoni alla prima e la terza 3 semitoni a partire dalla seconda", BOT_KEY));
             adapter.notifyDataSetChanged();
-        } else {
+        } else if (message.toLowerCase().equals("ciao")) {
+            chats.add(new Chat("Ciao collega, sono a tua disposizione!", BOT_KEY));
+            adapter.notifyDataSetChanged();
+        } else if (message.toLowerCase().equals("accordo minore")) {
+            chats.add(new Chat("La triade di accordo maggiore è composta da 3 note, la prima è la nota di riferimento (ad esempio LA)"
+            + "la seconda si calcola sommando 2 semitoni alla prima e la terza 4 semitoni a partire dalla seconda", BOT_KEY));
+            adapter.notifyDataSetChanged();
+        } else if (message.toLowerCase().equals("semitono")) {
+            chats.add(new Chat("Un semitono rappresenta il più piccolo intervallo praticato nel sistema musicale moderno, " +
+                    "equivalente alla metà di un tono; può essere diatonico (e corrisponde allora a un intervallo di seconda: per es. mi-fa ) " +
+                    "o cromatico (quando unisce una nota alla sua alterazione: per es. do-do diesis ; do-do bemolle ).", BOT_KEY));
+            adapter.notifyDataSetChanged();
+        }
+        else {
             chats.add(new Chat("Mi spiace collega, non sono in grado di decifrare il messaggio che hai inviato, digita help per avere informazioni", BOT_KEY));
             adapter.notifyDataSetChanged();
         }

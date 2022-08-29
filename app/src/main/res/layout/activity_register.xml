@@ -93,6 +93,7 @@
       android:layout_width="wrap_content"
       android:layout_height="wrap_content"
       android:text="Choose profile image"
+      android:background="@drawable/rounded_corner"
       android:gravity="center"
       android:layout_gravity="center"
       android:layout_marginTop="20dp"/>
@@ -113,6 +114,7 @@
       android:layout_marginStart="20dp"
       android:layout_marginEnd="20dp"
       android:text="Register"
+      android:background="@drawable/rounded_corner"
       android:layout_marginTop="40dp"/>
 
   <LinearLayout

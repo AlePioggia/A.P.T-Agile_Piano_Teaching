@@ -10,9 +10,14 @@
         <entry key="..\:/Users/alexp/AndroidStudioProjects/APTAgile_Piano_Teaching/app/src/main/res/drawable/ic_baseline_archive_24.xml" value="0.237" />
         <entry key="..\:/Users/alexp/AndroidStudioProjects/APTAgile_Piano_Teaching/app/src/main/res/drawable/ic_baseline_attach_email_24.xml" value="0.237" />
         <entry key="..\:/Users/alexp/AndroidStudioProjects/APTAgile_Piano_Teaching/app/src/main/res/drawable/ic_baseline_image_24.xml" value="0.1875" />
+        <entry key="..\:/Users/alexp/AndroidStudioProjects/APTAgile_Piano_Teaching/app/src/main/res/drawable/ic_baseline_menu_book_24.xml" value="0.2555" />
         <entry key="..\:/Users/alexp/AndroidStudioProjects/APTAgile_Piano_Teaching/app/src/main/res/drawable/ic_baseline_person_24.xml" value="0.1665" />
+        <entry key="..\:/Users/alexp/AndroidStudioProjects/APTAgile_Piano_Teaching/app/src/main/res/drawable/ic_baseline_send_24.xml" value="0.2555" />
+        <entry key="..\:/Users/alexp/AndroidStudioProjects/APTAgile_Piano_Teaching/app/src/main/res/drawable/ic_baseline_settings_24.xml" value="0.2555" />
+        <entry key="..\:/Users/alexp/AndroidStudioProjects/APTAgile_Piano_Teaching/app/src/main/res/drawable/ic_baseline_tag_faces_24.xml" value="0.2555" />
         <entry key="..\:/Users/alexp/AndroidStudioProjects/APTAgile_Piano_Teaching/app/src/main/res/drawable/ic_baseline_work_24.xml" value="0.1665" />
         <entry key="..\:/Users/alexp/AndroidStudioProjects/APTAgile_Piano_Teaching/app/src/main/res/drawable/ic_launcher_background.xml" value="0.1665" />
+        <entry key="..\:/Users/alexp/AndroidStudioProjects/APTAgile_Piano_Teaching/app/src/main/res/drawable/rounded_corner.xml" value="0.296" />
         <entry key="..\:/Users/alexp/AndroidStudioProjects/APTAgile_Piano_Teaching/app/src/main/res/layout/activity_assignment.xml" value="0.25" />
         <entry key="..\:/Users/alexp/AndroidStudioProjects/APTAgile_Piano_Teaching/app/src/main/res/layout/activity_chatbot.xml" value="0.3625" />
         <entry key="..\:/Users/alexp/AndroidStudioProjects/APTAgile_Piano_Teaching/app/src/main/res/layout/activity_edit_lessons.xml" value="0.25" />
@@ -30,7 +35,7 @@
         <entry key="..\:/Users/alexp/AndroidStudioProjects/APTAgile_Piano_Teaching/app/src/main/res/layout/bot_msg_rv_item.xml" value="0.2640625" />
         <entry key="..\:/Users/alexp/AndroidStudioProjects/APTAgile_Piano_Teaching/app/src/main/res/layout/card.xml" value="0.3625" />
         <entry key="..\:/Users/alexp/AndroidStudioProjects/APTAgile_Piano_Teaching/app/src/main/res/layout/edit_profile_dialog.xml" value="0.2640625" />
-        <entry key="..\:/Users/alexp/AndroidStudioProjects/APTAgile_Piano_Teaching/app/src/main/res/layout/fragment_add.xml" value="0.18" />
+        <entry key="..\:/Users/alexp/AndroidStudioProjects/APTAgile_Piano_Teaching/app/src/main/res/layout/fragment_add.xml" value="0.3516483516483517" />
         <entry key="..\:/Users/alexp/AndroidStudioProjects/APTAgile_Piano_Teaching/app/src/main/res/layout/fragment_home.xml" value="0.21" />
         <entry key="..\:/Users/alexp/AndroidStudioProjects/APTAgile_Piano_Teaching/app/src/main/res/layout/fragment_menu.xml" value="0.26614583333333336" />
         <entry key="..\:/Users/alexp/AndroidStudioProjects/APTAgile_Piano_Teaching/app/src/main/res/layout/fragment_profile.xml" value="0.25" />

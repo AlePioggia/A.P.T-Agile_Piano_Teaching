@@ -15,7 +15,7 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Lesson"
+            android:text="Studente"
             android:textStyle="bold"
             android:fontFamily="sans-serif-condensed"
             android:textSize="18sp"
@@ -25,12 +25,31 @@
             android:id="@+id/lessonSpinner"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
+            android:layout_marginTop="15dp"
             android:background="@android:drawable/btn_dropdown"
+            android:backgroundTint="@color/gray"
             android:spinnerMode="dialog" />
+
+        <View
+            android:layout_marginTop="20dp"
+            android:layout_width="match_parent"
+            android:layout_height="5dp"
+            android:background="@color/gray"/>
+
+        <TextView
+            android:layout_marginTop="15dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Orario"
+            android:textStyle="bold"
+            android:fontFamily="sans-serif-condensed"
+            android:textSize="18sp"
+            android:gravity="center"
+            />
 
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/lessonDateBtn"
+            android:background="@drawable/rounded_corner"
             android:layout_marginTop="10dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -42,6 +61,7 @@
             android:layout_height="wrap_content"
             android:text="data"
             android:fontFamily="sans-serif-condensed"
+            android:layout_marginTop="15dp"
             android:textSize="18sp"
             android:gravity="center"
             />
@@ -50,10 +70,12 @@
             android:id="@+id/lessonStartTimeBtn"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
+            android:layout_marginTop="15dp"
+            android:background="@drawable/rounded_corner"
             android:text="Seleziona orario d'inizio" />
 
         <TextView
+            android:layout_marginTop="15dp"
             android:id="@+id/showStartDate"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -67,7 +89,8 @@
             android:id="@+id/lessonEndTimeBtn"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
+            android:layout_marginTop="15dp"
+            android:background="@drawable/rounded_corner"
             android:text="Seleziona orario di fine lezione" />
 
         <TextView
@@ -77,11 +100,18 @@
             android:fontFamily="sans-serif-condensed"
             android:textSize="18sp"
             android:text="orario di fine"
+            android:layout_marginTop="15dp"
             android:gravity="center"
             />
 
+        <View
+            android:layout_marginTop="20dp"
+            android:layout_width="match_parent"
+            android:layout_height="5dp"
+            android:background="@color/gray"/>
+
         <TextView
-            android:layout_marginTop="10dp"
+            android:layout_marginTop="15dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Compiti"
@@ -93,7 +123,7 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_marginTop="10dp"
+            android:layout_marginTop="15dp"
             android:layout_height="match_parent"
             android:orientation="horizontal" >
 
@@ -102,7 +132,8 @@
                 android:id="@+id/showAssignmentsButton"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:text="Mostra assignments" />
+                android:text="Mostra assignments"
+                android:background="@drawable/rounded_corner"/>
 
             <ImageView
                 android:id="@+id/selectAssignmentButton"
@@ -111,6 +142,12 @@
                 android:layout_weight="1"
                 android:src="@drawable/ic_baseline_add_circle_outline_24" />
         </LinearLayout>
+
+        <View
+            android:layout_marginTop="20dp"
+            android:layout_width="match_parent"
+            android:layout_height="5dp"
+            android:background="@color/gray"/>
 
         <TextView
             android:layout_marginTop="10dp"
@@ -132,9 +169,15 @@
             android:layout_height="match_parent"
         />
 
+        <View
+            android:layout_marginTop="20dp"
+            android:layout_width="match_parent"
+            android:layout_height="5dp"
+            android:background="@color/gray"/>
+
         <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
             android:layout_width="match_parent"
-            android:layout_marginTop="10dp"
+            android:layout_marginTop="15dp"
             android:layout_height="match_parent"
             android:orientation="horizontal" >
 
@@ -143,6 +186,7 @@
                 android:id="@+id/lessonConfirmBtn"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                android:background="@drawable/rounded_corner"
                 android:text="Conferma" />
 
             <androidx.appcompat.widget.AppCompatButton
@@ -150,6 +194,7 @@
                 android:id="@+id/lessonCancelBtn"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                android:background="@drawable/rounded_corner"
                 android:text="Annulla" />
         </LinearLayout>
 

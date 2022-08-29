@@ -6,6 +6,7 @@
     android:layout_gravity="start"
     android:layout_margin="5dp"
     android:elevation="8dp"
+    android:backgroundTint="@color/green"
     app:cardCornerRadius="8dp">
 
     <LinearLayout
@@ -24,6 +25,7 @@
             android:layout_height="wrap_content"
             android:id="@+id/idTVBot"
             android:layout_margin="5dp"
+
             android:gravity="center"
             android:padding="3dp"
             android:text="Bot message"/>
