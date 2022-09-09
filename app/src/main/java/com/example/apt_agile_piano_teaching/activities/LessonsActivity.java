@@ -19,6 +19,8 @@ import com.example.apt_agile_piano_teaching.databinding.ActivityLessonsBinding;
 import com.example.apt_agile_piano_teaching.listeners.LessonListener;
 import com.example.apt_agile_piano_teaching.models.Assignment;
 import com.example.apt_agile_piano_teaching.models.Lesson;
+import com.example.apt_agile_piano_teaching.utils.Preference;
+import com.example.apt_agile_piano_teaching.utils.Settings;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
@@ -48,8 +50,15 @@ public class LessonsActivity extends AppCompatActivity implements LessonListener
     @RequiresApi(api = Build.VERSION_CODES.O)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        mImageTemplateUri = "templates/" + FirebaseAuth.getInstance().getCurrentUser().getEmail() +
-                "_template.jpg";
+        Settings imageSettings = new Settings(LessonsActivity.this, Preference.IMAGE_TEMPLATE_PREFERENCE);
+
+        if  (imageSettings.getPreference()) {
+            mImageTemplateUri = "templates/" + FirebaseAuth.getInstance().getCurrentUser().getEmail() +
+                    "_template.jpg";
+        } else {
+            mImageTemplateUri = "templates/piano.jpg";
+        }
+
         super.onCreate(savedInstanceState);
         binding = ActivityLessonsBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
@@ -69,8 +78,6 @@ public class LessonsActivity extends AppCompatActivity implements LessonListener
                         for (QueryDocumentSnapshot queryDocumentSnapshots : task.getResult()) {
                             Map startDateMap = (Map) queryDocumentSnapshots.get("startDate");
                             Map endDateMap = (Map) queryDocumentSnapshots.get("endDate");
-
-                            ArrayList<Assignment> assignments = (ArrayList<Assignment>) queryDocumentSnapshots.get("assignments");
 
                             int startDateYear = ((Number) startDateMap.get("year")).intValue();
                             int startDayOfMonth = ((Number) startDateMap.get("dayOfMonth")).intValue();

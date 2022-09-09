@@ -1,6 +1,8 @@
 package com.example.apt_agile_piano_teaching.activities;
 
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
 
 import android.os.Build;
 import android.os.Bundle;
@@ -13,82 +15,66 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.example.apt_agile_piano_teaching.R;
+import com.example.apt_agile_piano_teaching.adapters.LessonAdapter;
+import com.example.apt_agile_piano_teaching.adapters.UserAdapter;
+import com.example.apt_agile_piano_teaching.databinding.ActivityStudentsBinding;
+import com.example.apt_agile_piano_teaching.models.Assignment;
+import com.example.apt_agile_piano_teaching.models.Lesson;
+import com.example.apt_agile_piano_teaching.models.User;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 
+import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public class StudentsActivity extends AppCompatActivity {
 
-    private ListView mListView;
-    private StorageReference mStorageRef;
-    private FirebaseFirestore mDbReference = FirebaseFirestore.getInstance();
-    private Map<String, String> studentsMap = new HashMap<>();
-    private String[] students = new String[10];
-    private String[] names = new String[10];
+    private ActivityStudentsBinding binding;
+    private UserAdapter adapter;
+    FirebaseFirestore db;
+    private List<User> users;
 
+
+    @RequiresApi(api = Build.VERSION_CODES.O)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_students);
-        mListView = findViewById(R.id.studentsListView);
-        mDbReference.collection("users").get().addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
-            @Override
-            public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
-                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
-                    queryDocumentSnapshots.getDocuments().forEach(document -> {
-                        studentsMap.put(document.get("mail").toString(), document.get("name") + " " + document.get("lastName"));
-                    });
-                }
-                students = new String[studentsMap.size()];
-                names = new String[studentsMap.size()];
+        binding = ActivityStudentsBinding.inflate(getLayoutInflater());
+        setContentView(binding.getRoot());
 
-                for (int i = 0; i < students.length; i++) {
-                    students[i] = studentsMap.keySet().toArray()[i].toString();
-                    names[i] = studentsMap.get(students[i]);
-                }
-            }
-        });
+        db = FirebaseFirestore.getInstance();
 
-        StudentAdapter studentAdapter = new StudentAdapter();
-        mListView.setAdapter(studentAdapter);
+        displayUsersAdapter();
     }
 
-    public class StudentAdapter extends BaseAdapter {
-
-        @Override
-        public int getCount() {
-            return students.length;
-        }
-
-        @Override
-        public Object getItem(int i) {
-            mStorageRef = FirebaseStorage.getInstance().getReference("uploads/" + students[i] + ".jpg");
-            return mStorageRef;
-        }
-
-        @Override
-        public long getItemId(int i) {
-            return i;
-        }
-
-        @Override
-        public View getView(int i, View view, ViewGroup viewGroup) {
-            System.out.print("Sono dentro la get view");
-
-            view = getLayoutInflater().inflate(R.layout.card, viewGroup, false);
-            ImageView mImageView = view.findViewById(R.id.studentImageView);
-            TextView mTextView = view.findViewById(R.id.studentTextView);
-
-            mTextView.setText(names[i]);
-            mStorageRef = FirebaseStorage.getInstance().getReference("uploads/" + students[i] + ".jpg");
-            Glide.with(view).load(mStorageRef).into(mImageView);
-
-            return view;
-        }
+    @RequiresApi(api = Build.VERSION_CODES.O)
+    private void displayUsersAdapter() {
+        db.collection("users")
+                .get()
+                .addOnCompleteListener(task -> {
+                    if (task.isSuccessful() && task.getResult() != null) {
+                        users = new ArrayList<>();
+                        for (QueryDocumentSnapshot queryDocumentSnapshot: task.getResult()) {
+                            User user = new User(queryDocumentSnapshot.getString("mail")
+                                    , queryDocumentSnapshot.getString("name"), queryDocumentSnapshot.getString("lastName"));
+                            users.add(user);
+                        }
+                    }
+                    if (users.size() > 0) {
+                        adapter = new UserAdapter(users, getApplicationContext());
+                        binding.studentsRecyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
+                        binding.studentsRecyclerView.setAdapter(adapter);
+                        binding.studentsRecyclerView.setVisibility(View.VISIBLE);
+                    }
+                });
     }
+
+
 }
