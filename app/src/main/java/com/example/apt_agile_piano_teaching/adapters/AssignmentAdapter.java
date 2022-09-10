@@ -7,9 +7,11 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
 import com.example.apt_agile_piano_teaching.databinding.AssignmentItemBinding;
 import com.example.apt_agile_piano_teaching.listeners.AssignmentListener;
 import com.example.apt_agile_piano_teaching.models.Assignment;
+import com.google.firebase.storage.FirebaseStorage;
 
 import java.util.ArrayList;
 
@@ -56,11 +58,11 @@ public class AssignmentAdapter extends RecyclerView.Adapter<AssignmentAdapter.As
         }
 
         void setAssignmentData(Assignment assignment) {
-            binding.showAssignmentExerciseType.setText(assignment.getExercise());
-            binding.showAssignmentBook.setText(assignment.getBookName());
-            binding.showAssignmentBpm.setText(String.valueOf(assignment.getBpm()));
-            binding.showAssignmentPages.setText(assignment.getPages());
-            binding.showDeleteBtn.setOnClickListener(v -> assignmentListener.onAssignmentClicked(assignment));
+            binding.assignmentExercise.setText(assignment.getExercise());
+            binding.assignmentPagesAndBook.setText(assignment.getBookName() + " pg: " + assignment.getPages());
+            binding.assignmentBpm.setText(String.valueOf(assignment.getBpm()));
+            Glide.with(context).load(FirebaseStorage.getInstance().getReference("templates/assignment.jpg")).into(binding.assignmentImageView);
+            binding.deleteAssignment.setOnClickListener(v -> assignmentListener.onAssignmentClicked(assignment));
         }
 
     }

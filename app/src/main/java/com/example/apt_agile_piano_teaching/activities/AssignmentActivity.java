@@ -76,6 +76,7 @@ public class AssignmentActivity extends AppCompatActivity implements AssignmentL
                     });
         } else {
             if (assignments.size() > 0) {
+                System.out.println(assignments);
                 adapter = new AssignmentAdapter(getApplicationContext(), assignments, this);
                 binding.recyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
                 binding.recyclerView.setAdapter(adapter);

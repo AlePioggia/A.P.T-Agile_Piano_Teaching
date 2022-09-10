@@ -206,6 +206,8 @@ public class EditLessonsActivity extends AppCompatActivity {
                         , binding.editLessonNotes.getText().toString(), "templates/piano.jpg");
                 newLesson.setId(lesson.getId());
 
+                System.out.println(assignments);
+
                 for (Assignment assignment: assignments) {
                     final String assignmentId = UUID.randomUUID().toString();
 

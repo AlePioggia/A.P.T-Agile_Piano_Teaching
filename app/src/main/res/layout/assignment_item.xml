@@ -1,76 +1,59 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:paddingTop="15dp"
-    android:paddingBottom="15dp"
-    android:layout_marginBottom="3dp">
+    android:layout_height="wrap_content"
+    app:cardCornerRadius="15dp">
 
-    <LinearLayout
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        android:layout_height="match_parent">
 
-        <TextView
-            android:id="@+id/showAssignmentExerciseType"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_weight="1"
-            android:gravity="center"
-            android:text="Tipo esercizio"
-            android:textColor="@color/black"
-            android:textSize="15dp" />
-
-        <TextView
-            android:id="@+id/showAssignmentBook"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_weight="1"
-            android:gravity="center"
-            android:text="Libro"
-            android:textColor="@color/black"
-            android:textSize="15dp" />
-
-        <TextView
-            android:id="@+id/showAssignmentPages"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_weight="1"
-            android:gravity="center"
-            android:text="1, 2, 3"
-            android:textColor="@color/black"
-            android:textSize="15dp" />
-
-        <TextView
-            android:id="@+id/showAssignmentBpm"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_weight="1"
-            android:gravity="center"
-            android:text="80"
-            android:textColor="@color/black"
-            android:textSize="15dp" />
-        
         <ImageView
-            android:src="@drawable/ic_baseline_delete_24"
-            android:id="@+id/showDeleteBtn"
+            android:id="@+id/assignmentImageView"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_gravity="center"
-            android:layout_weight="1"
-            android:gravity="center"
-            android:text="elimina"
-            android:textColor="@color/black"/>
+            android:layout_height="260dp"
+            android:scaleType="centerCrop"></ImageView>
 
+        <TextView
+            android:id="@+id/assignmentExercise"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/assignmentImageView"
+            android:layout_centerHorizontal="true"
+            android:text="Esercizio"
+            android:textSize="24sp"
+            android:textStyle="bold" />
 
-    </LinearLayout>
+        <TextView
+            android:layout_marginTop="10dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="24sp"
+            android:textStyle="bold"
+            android:layout_below="@id/assignmentExercise"
+            android:text="Pagine e libro"
+            android:layout_centerHorizontal="true"
+            android:id="@+id/assignmentPagesAndBook" />
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+        <TextView
+            android:id="@+id/assignmentBpm"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/assignmentPagesAndBook"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="10dp"
+            android:text="Bpm"
+            android:textSize="24sp"
+            android:textStyle="bold" />
+
+        <ImageView
+            android:id="@+id/deleteAssignment"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_below="@+id/assignmentBpm"
+            android:layout_centerHorizontal="true"
+            android:src="@drawable/ic_baseline_delete_24"></ImageView>
+    </RelativeLayout>
+
+</androidx.cardview.widget.CardView>
