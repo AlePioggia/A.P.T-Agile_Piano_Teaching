@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="360dp">
 
     <TextView
         android:id="@+id/assignmentTextView"
@@ -14,13 +14,15 @@
         android:textSize="18sp"
         android:gravity="center"
     />
+
     <androidx.appcompat.widget.AppCompatSpinner
-        android:layout_below="@id/assignmentTextView"
         android:id="@+id/assignmentSpinner"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_below="@id/assignmentTextView"
         android:layout_marginTop="10dp"
         android:background="@android:drawable/btn_dropdown"
+        android:backgroundTint="@color/gray"
         android:spinnerMode="dialog" />
 
     <EditText
@@ -65,51 +67,27 @@
         android:paddingStart="20dp"
         android:paddingEnd="0dp"/>
 
-    <TextView
-        android:id="@+id/assignmentNotes"
-        android:layout_marginTop="20dp"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/assignmentBpm"
-        android:text="Note"
-        android:textStyle="bold"
-        android:fontFamily="sans-serif-condensed"
-        android:textSize="18sp"
-        android:gravity="center"
-        />
-
-    <EditText
-        android:id="@+id/lessonNotes"
-        android:layout_below="@id/assignmentNotes"
-        android:hint="Spazio dedicato a delle eventuali note (opzionale)"
-        android:layout_marginTop="10dp"
-        android:layout_centerHorizontal="true"
-        android:height="100dp"
-        android:gravity="center"
-        android:layout_centerVertical="true"
-        android:layout_width="300dp"
-        android:layout_height="150dp"
-        />
-
     <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="horizontal"
-        android:layout_below="@id/lessonNotes"
-        android:layout_marginTop="20dp">
+        android:layout_below="@id/assignmentBpm"
+        android:layout_marginTop="19dp"
+        android:orientation="horizontal">
 
         <androidx.appcompat.widget.AppCompatButton
-            android:layout_weight="1"
             android:id="@+id/assignmentConfirm"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="@drawable/rounded_corner"
             android:text="Conferma" />
 
         <androidx.appcompat.widget.AppCompatButton
-            android:layout_weight="1"
             android:id="@+id/assignmentCancel"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="@drawable/rounded_corner"
             android:text="Annulla" />
     </LinearLayout>
 

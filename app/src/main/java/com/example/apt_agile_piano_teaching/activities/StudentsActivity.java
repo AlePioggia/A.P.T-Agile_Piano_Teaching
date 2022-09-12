@@ -64,7 +64,9 @@ public class StudentsActivity extends AppCompatActivity {
                         for (QueryDocumentSnapshot queryDocumentSnapshot: task.getResult()) {
                             User user = new User(queryDocumentSnapshot.getString("mail")
                                     , queryDocumentSnapshot.getString("name"), queryDocumentSnapshot.getString("lastName"));
-                            users.add(user);
+                            if (!user.getMail().equals("federicobrunelli@gmail.com")) {
+                                users.add(user);
+                            }
                         }
                     }
                     if (users.size() > 0) {

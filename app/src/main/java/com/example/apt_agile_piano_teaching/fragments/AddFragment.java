@@ -125,6 +125,7 @@ public class AddFragment extends Fragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_add, container, false);
         lessonConfirmButton = view.findViewById(R.id.lessonConfirmBtn);
+        cancelButton = view.findViewById(R.id.lessonCancelBtn);
         assignmentButton = view.findViewById(R.id.selectAssignmentButton);
         lessonDateBtn = view.findViewById(R.id.lessonDateBtn);
         lessonNotes = view.findViewById(R.id.lessonNotes);
@@ -185,6 +186,17 @@ public class AddFragment extends Fragment {
                                 Toast.makeText(getActivity(), "Inserimento della lezione avvenuto con successo", Toast.LENGTH_SHORT).show();
                             }
                         });
+            }
+        });
+
+        cancelButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                lessonDateBtn.setText("");
+                lessonNotes.setText("");
+                showDate.setText("");
+                showStartDate.setText("");
+                showEndDate.setText("");
             }
         });
 
